@@ -198,7 +198,7 @@ robot=sol.judgeCircle(moves=s_robot)
 ##############################################################################
 
 # 1002. Find Common Characters
-input_ls_common_carr=['kurwa','kalinowska']
+input_ls_common_carr=['mercedes','playstation']
 answer_ls_common_carr=sol.commonChars(input_ls_common_carr)
 ##############################################################################
 
