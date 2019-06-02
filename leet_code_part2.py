@@ -181,6 +181,27 @@ class Solution:
         return l_subsets
 
 
+# 704. Binary Search (runtime error for leetcode)
+
+
+    def binary_search_helper(self,l_array,target,left,right):
+        if left>right:
+            return -1
+
+        middle=(left+right)//2
+        potential_match=l_array[middle]
+        if target==potential_match:
+            return[middle]
+        elif target<potential_match:
+            return self.binary_search_helper(l_array,target,left,middle-1)
+
+        else:
+            return self.binary_search_helper(l_array,target,middle+1,right)
+
+    def search(self,l_array: List[int], target: int) -> int:
+        return self.binary_search_helper(l_array,target,0,len(l_array)-1)[0]
+
+
 
 
 
@@ -254,6 +275,9 @@ l_in_set=[1,2,3]
 answer_subset=sol.subsets(l_set=[1,2,3])
 ##############################################################################
 
+# 704. Binary Search
+l_in_bin_search=[0,1,21,33,45,45,61,71,72,73]
+answer_bin_search=sol.search(l_array=l_in_bin_search,target=33)
 
 print("The end")
 # def commonChars(self, A: List[str]) -> List[str]:
