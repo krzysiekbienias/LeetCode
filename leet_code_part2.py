@@ -171,6 +171,16 @@ class Solution:
         return nums[midle_index+1]
 
 
+# 78. Subsets
+    def subsets(self, l_set:List[int]) -> List[List[int]]:
+        l_subsets=[[]]
+        for ele in l_set:# a list with name set
+            for i in range(len(l_subsets)):
+                curr_subset=l_subsets[i]
+                l_subsets.append(curr_subset+[ele])
+        return l_subsets
+
+
 
 
 
@@ -227,17 +237,23 @@ i_scheduling_cost=sol.twoCitySchedCost(costs=ll_in_cost)
 
 #202. Happy Number
 b_happy_numbers=sol.isHappy(n=34)
+##############################################################################
 
 #13. Roman to Integer
 answer=sol.romanToInt(roman='VIII')
-
+##############################################################################
 
 # 169. Majority Element
 l_in_majority=[2,2,1,1,1,2,2,5,5,5,5,5] # in this case there is no majority element bo to nie to samo co moda.
 # Majority element is the element the element that appears more than n/2
 answer_majority=sol.majorityElement(nums=l_in_majority)
-
 ##############################################################################
+
+# 78. Subsets
+l_in_set=[1,2,3]
+answer_subset=sol.subsets(l_set=[1,2,3])
+##############################################################################
+
 
 print("The end")
 # def commonChars(self, A: List[str]) -> List[str]:
