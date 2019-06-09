@@ -3,6 +3,23 @@ import numpy as np
 from collections import Counter
 
 class Solution:
+    def __init__(self):
+        self.m_perimeter = self.islandPerimeter(grid=[[0,1,0,0],[1,1,1,0],[0,1,0,0],[1,1,0,0]]) #463
+        self.mll_revert = self.flipAndInvertImage(a=[[1, 1, 0], [1, 0, 1], [0, 0, 0]]) #832
+        self.mf_robot = self.judgeCircle(moves='UUDR') #657
+        self.mls_common_carr = self.commonChars(A=['mercedes','playstation'])#1002
+        self.mi_complement = self.findComplement(num=7) #476
+        self.m_lemoniade = self.lemonadeChange(bills=[5,5,5,10,5,5,10,20,20,20])#860
+        self.m_partition1 = self.arrayPairSum(nums=[1,4,3,2])
+        self.i_scheduling_cost=self.twoCitySchedCost(costs=[[10,20],[30,200],[10,80],[90,120],[400,50],[30,20]])
+        self.b_happy_numbers = self.isHappy(n=34)#202
+        self.m_roman_converted = self.romanToInt(roman='VIII')#13
+        self.m_majority = self.majorityElement(nums=[2,2,1,1,1,2,2,5,5,5,5,5])#169
+        self.m_subsets = self.subsets(l_set=[1, 2, 3])#78
+        self.m_bin_search = self.search(l_array=[0,1,21,33,45,45,61,71,72,73], target=33)#704
+        self.mb_is_int_palin=self.isPalindrome(x=1) #9
+
+
 
 #463 Island perimeter
 
@@ -202,8 +219,29 @@ class Solution:
         return self.binary_search_helper(l_array,target,0,len(l_array)-1)[0]
 
 
+#9.Determine whether an integer is a palindrome. An integer is a palindrome when it reads the same backward as forward.
 
 
+    def isPalindrome(self, x: int) -> bool: #11504 / 11509 test cases passed.  issue for x=1000021
+        b_status=False
+        if x<0:
+            return b_status
+        elif x==0:
+            b_status=True
+            return b_status
+        else:
+
+            l_x=list(str(x)) #list of x
+            l_x_reverse=l_x[::-1]
+            for i in range(len(l_x)):
+                if len(l_x)==1:
+                    return True
+                elif l_x[0]!=l_x[-1]:
+                    b_status=False
+            else:
+                if (l_x[i]==l_x_reverse[i] and l_x[-1]!='0'):
+                    b_status=True
+        return  b_status
 
 
 
@@ -212,86 +250,10 @@ class Solution:
 ##############################################################################
 
 sol=Solution()
-#463 Island perimeter
-ll_simpler_grid=[[0,1,0],[0,1,0]]
-ll_grid=[[0,1,0,0],[1,1,1,0],[0,1,0,0],[1,1,0,0]]
-i_perimeter=sol.islandPerimeter(grid=ll_grid)
-##############################################################################
 
-#832. Flipping an Image
-ll_test=[[1,1,0],[1,0,1],[0,0,0]]
-ll_revert=sol.flipAndInvertImage(a=[[1,1,0],[1,0,1],[0,0,0]])
-##############################################################################
 
-#657. Robot Return to Origin
-s_robot='UDL'
-robot=sol.judgeCircle(moves=s_robot)
-##############################################################################
 
-# 1002. Find Common Characters
-input_ls_common_carr=['mercedes','playstation']
-answer_ls_common_carr=sol.commonChars(input_ls_common_carr)
-##############################################################################
 
-#476. Number Complement
-answer_i_complement=sol.findComplement(num=7)
-##############################################################################
-
-#860. Lemonade Change
-l_clinents1=[5,5,5,10,5,5,10,20,20,20]#now this work
-l_clinents2=[5,5,5,10,20]# this does not work
-answer_lemoniade=sol.lemonadeChange(bills=l_clinents2)
-##############################################################################
-
-#509. Fibonacci Number
-#i_answer_fib=sol.fib(N=6)
-
-#561. Array Partition I
-l_partition_1=[1,4,3,2]
-answer_partition1=sol.arrayPairSum(nums=l_partition_1)
-##############################################################################
-
-#1029. Two City Scheduling
-ll_in_cost=[[10,20],[30,200],[10,80],[90,120],[400,50],[30,20]]
-i_scheduling_cost=sol.twoCitySchedCost(costs=ll_in_cost)
-##############################################################################
-
-#202. Happy Number
-b_happy_numbers=sol.isHappy(n=34)
-##############################################################################
-
-#13. Roman to Integer
-answer=sol.romanToInt(roman='VIII')
-##############################################################################
-
-# 169. Majority Element
-l_in_majority=[2,2,1,1,1,2,2,5,5,5,5,5] # in this case there is no majority element bo to nie to samo co moda.
-# Majority element is the element the element that appears more than n/2
-answer_majority=sol.majorityElement(nums=l_in_majority)
-##############################################################################
-
-# 78. Subsets
-l_in_set=[1,2,3]
-answer_subset=sol.subsets(l_set=[1,2,3])
-##############################################################################
-
-# 704. Binary Search
-l_in_bin_search=[0,1,21,33,45,45,61,71,72,73]
-answer_bin_search=sol.search(l_array=l_in_bin_search,target=33)
 
 print("The end")
-# def commonChars(self, A: List[str]) -> List[str]:
-# 	unique_letters = set(A[0])
-# 	result = []
-# 	for letter in unique_letters:
-# 		counters = []
-# 		for word in A:
-# 			count = word.count(letter)
-# 			if count == 0:
-# 				break
-# 			counters.append(count)
-# 		min_count = min(counters)
-# 		while min_count > 0 and len(counters) == len(A):
-# 			result.append(letter)
-# 			min_count -= 1
-# 	return result
+

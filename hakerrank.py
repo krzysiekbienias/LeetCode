@@ -84,7 +84,7 @@ def countingValleys(s):
         if s[i]=="U":
             temp+=1
         if s[i]=="D":
-            temp=-1
+            temp-=1
         if temp<-1:
             num_of_valeys+=1
     return  num_of_valeys
