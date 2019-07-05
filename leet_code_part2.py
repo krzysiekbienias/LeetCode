@@ -2,7 +2,7 @@ from typing import List
 import numpy as np
 from collections import Counter
 
-class Solution:
+class SolutionPart1:
     def __init__(self):
         self.m_perimeter = self.islandPerimeter(grid=[[0,1,0,0],[1,1,1,0],[0,1,0,0],[1,1,0,0]]) #463
         self.mll_revert = self.flipAndInvertImage(a=[[1, 1, 0], [1, 0, 1], [0, 0, 0]]) #832
@@ -198,7 +198,7 @@ class Solution:
         return l_subsets
 
 
-# 704. Binary Search (runtime error for leetcode)
+# 704. Binary Search (runtime error for leetcode)#solution from
 
 
     def binary_search_helper(self,l_array,target,left,right):
@@ -244,12 +244,42 @@ class Solution:
         return  b_status
 
 
+class SolutionPart2:
+    def __init__(self):
+        self.mint_first_non_repetingch=self.first_non_repeting_char(s='kaczka')
+
+
+    #387. First Unique Character in a String
+    def first_non_repeting_char(self,s):
+        dic = {}
+        for ch in s:
+            dic[ch] = dic.get(ch, 0)+1
+
+        for ch in s:
+
+            if dic[ch] == 1:
+                return ch
+
+    def booble_sort(self,array):
+        is_sorted=False
+        while not is_sorted:
+            is_sorted=True
+            for i in range(len(array)-1):
+                if array[i]>array[i+1]:
+                    self.swap(i,i+1,array)
+                    is_sorted=False
+        return array
+
+    def swap(self,i,j,array):
+        array[i],array[j]=array[j],array[i]
+
 
 
 ##############################################################################
 ##############################################################################
 
-sol=Solution()
+sol=SolutionPart1()
+sol2=SolutionPart2()
 
 
 
