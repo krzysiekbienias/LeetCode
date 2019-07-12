@@ -12,7 +12,7 @@ class Strings:
         self.ml_thirdword=self.findOcurrences(text = "we will we will rock you", first = "we", second = "will")#1078
         self.mb_anagram=self.isAnagram(s='anagram',t='nagaram')
         self.mb_patern=self.wordPattern(pattern='abba',words='dog cat cat dog')
-        self.m_len_of_last_word=self.lengthOfLastWord(s='hello world')
+        self.m_len_of_last_word=self.lengthOfLastWord(s=' ')
 
         # 657. Robot Return to Origin
 
@@ -123,8 +123,10 @@ class Strings:
 
     #58. Length of Last Word
     def lengthOfLastWord(self, s: str) -> int:
-        if len(s)==1:
+        if (len(s)==1 and s!=" "):
             return 1
+        elif (s=='' and (s==" " or s==' ')):
+            return 0
         l_words=s.split(' ')
         last_word=l_words[-1]
         return len(last_word)
