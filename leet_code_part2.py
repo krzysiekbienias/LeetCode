@@ -8,7 +8,11 @@ class Strings:
         self.mf_robot = self.judgeCircle(moves='UUDR')
         self.mls_common_carr = self.commonChars(A=['mercedes', 'playstation'])
         self.m_roman_converted = self.romanToInt(roman='VIII')  # 657
-        self.mint_first_non_repetingch = self.first_non_repeting_char(s="aadadaad")
+        self.mint_first_non_repetingch = self.first_non_repeting_char(s="aadaada")
+        self.ml_thirdword=self.findOcurrences(text = "we will we will rock you", first = "we", second = "will")#1078
+        self.mb_anagram=self.isAnagram(s='anagram',t='nagaram')
+        self.mb_patern=self.wordPattern(pattern='abba',words='dog cat cat dog')
+        self.m_len_of_last_word=self.lengthOfLastWord(s='hello world')
 
         # 657. Robot Return to Origin
 
@@ -40,8 +44,8 @@ class Strings:
         for ch in s:
             dic[ch] = dic.get(ch, 0) + 1
             l_chfrequency = list(dic.values())
-        if len(l_chfrequency) == 1:
-            return -1
+        if 1 not in l_chfrequency:
+                return -1
         for ch in s:
             if dic[ch] == 1:
                 first_ch = ch
@@ -70,6 +74,60 @@ class Strings:
                 int_converted += dic_transorm[roman[i]]
         int_converted += dic_transorm[roman[-1]]
         return int_converted
+    #1078. Occurrences After Bigram
+
+    def findOcurrences(self, text: str, first: str, second: str) -> List[str]:
+
+        l_splited_text=text.split()
+        mapping={}
+        for i in range(len(l_splited_text)-2):
+            t_key=(l_splited_text[i],l_splited_text[i+1])
+            mapping.setdefault(t_key,[]).append(l_splited_text[i+2])
+        current_keys=(first,second)
+        if current_keys not in mapping:
+            return[]
+        return mapping[current_keys]
+
+    #242. Valid Anagram
+
+    def isAnagram(self, s: str, t: str) -> bool:
+        dics={}
+        dict={}
+        if len(s)!=len(t):
+            return False
+        for ch in s:
+            dics[ch]=dics.get(ch, 0) + 1
+        for ch2 in t:
+            dict[ch2]=dict.get(ch2,0)+1
+        if dics==dict:
+            return True
+        else:
+            return False
+
+    #290. Word Pattern
+    #hint check if there is a bijection between values of dictionaries
+    def wordPattern(self, pattern: str, words: str) -> bool:
+        dic_pattern={}
+        dic_words={}
+        l_words=words.split(' ')
+        for ch in pattern:
+            dic_pattern[ch]=dic_pattern.get(ch,0)+1
+        l_values=list(dic_pattern.values())
+        for i in l_words:
+            dic_words[i]=dic_words.get(i,0)+1
+        l_words=list(dic_words.values())
+        if l_values==l_words:
+            return True
+        else:
+            return False
+
+    #58. Length of Last Word
+    def lengthOfLastWord(self, s: str) -> int:
+        if len(s)==1:
+            return 1
+        l_words=s.split(' ')
+        last_word=l_words[-1]
+        return len(last_word)
 
 
 class Arrays:
@@ -81,6 +139,7 @@ class Arrays:
         self.i_scheduling_cost = self.twoCitySchedCost(
             costs=[[10, 20], [30, 200], [10, 80], [90, 120], [400, 50], [30, 20]])
         self.m_majority = self.majorityElement(nums=[2, 2, 1, 1, 1, 2, 2, 5, 5, 5, 5, 5])  # 169
+        self.mint_single_numb=self.singleNumber(nums=[1,2,1,2,4])
 
         # 463 Island perimeter
 
@@ -169,6 +228,21 @@ class Arrays:
         nums.sort()
         midle_index = len(nums) // 2
         return nums[midle_index + 1]
+
+    # 136. Single Number
+
+    def singleNumber(self, nums: List[int]):
+        dic = {}
+        for i in nums:
+            dic[i] = dic.get(i, 0) + 1
+        list_of_items = list(dic.items())
+        for item in list_of_items:
+            if item[1] == 1:
+                return item[0]
+
+        return list_of_items
+
+
 
 
 class Searching:
@@ -272,9 +346,34 @@ class Math:
         return i_decimal_complement
 
 
+
+
+class DynamicProgramming:
+    def __init__(self):
+        self.m_house_rober=self.rob(nums=[1,3,1])
+
+
+    def rob(self, nums: List[int]) -> int:
+        if not nums:
+            return 0
+        if len(nums) == 1:
+            return nums[0]
+        if len(nums) == 2:
+            return max(nums)
+        elif len(nums) > 2:
+            total_robbed = [0] * len(nums)
+            total_robbed[0] = nums[0]
+            total_robbed[1] = max(nums[0], nums[1])
+            for i in range(2, len(nums)):
+                total_robbed[i] = max(nums[i] + total_robbed[i - 2], total_robbed[i - 1])
+
+            return total_robbed[-1]
+
+######################################----SOLUTIONS----#####################################################
 strings_lc=Strings()
 arrays_lc=Arrays()
 searching_lc=Searching()
 math_lc=Math()
+dynamic_prog_lc=DynamicProgramming()
 
 print("The end")
