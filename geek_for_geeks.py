@@ -1,5 +1,7 @@
 # Given an array, find the largest element in it.
 
+
+
 class GeeksforGeeks():
     def __init__(self):
 
@@ -40,4 +42,5 @@ class GeeksforGeeks():
 
 
 gfg = GeeksforGeeks()
+print(-float('inf'))
 print('the end')
