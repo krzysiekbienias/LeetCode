@@ -161,7 +161,26 @@ class Arrays:
         self.m_majority = self.majorityElement(nums=[2, 2, 1, 1, 1, 2, 2, 5, 5, 5, 5, 5])  # 169
         self.mint_single_numb = self.singleNumber(nums=[1, 2, 1, 2, 4])
 
-        # 463 Island perimeter
+
+     #283. Move Zeroes
+    def moveZeroes(self, nums: List[int]) -> None:
+
+
+
+
+    # 217. Contains Duplicate
+
+    def containsDuplicate(self, a_list:List[List])->bool:
+        l = len(a_list)
+        if (l < 2):
+            return False
+        a_list.sort()
+        for i in range(l - 1):
+            if a_list[i] == a_list[i + 1]:
+                return True
+        return False
+
+    # 463 Island perimeter
 
     def islandPerimeter(self, grid: List[List[int]]) -> int:
         width = len(grid)
