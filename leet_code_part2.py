@@ -15,6 +15,10 @@ class Strings:
         self.m_len_of_last_word = self.lengthOfLastWord(s='a ')
         self.m_ransom_note=self.canConstruct(ransomNote='aa', magazine='ab')
         self.m_ransom_note_count=self.canConstruct_using_count(ransomNote='fffbfg', magazine="effjfggbffjdgbjjhhdegh")
+        self.m_ransom_note_count=self.canConstruct_using_dict(ransomNote='fffbfg', magazine="effjfggbffjdgbjjhhdegh")
+
+
+
 
     def canConstruct(self, ransomNote: str, magazine: str) -> bool:#does not work for ransome='aa', magaizne='ab'
             l_ransom_note = list(ransomNote)
@@ -28,6 +32,17 @@ class Strings:
             return False
         else:
             return True
+    #dictionary approach
+
+    def canConstruct_using_dict(self, ransomNote: str, magazine: str) -> bool:
+        dic_magaz={}
+        dic_ransom={}
+
+        for ch in magazine:
+            dic_magaz[ch]=dic_magaz.get(ch,0)+1
+        for ch in ransomNote:
+            dic_ransom[ch]=dic_ransom.get(ch,0)+1
+        return False
 
 
 
