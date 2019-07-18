@@ -13,6 +13,24 @@ class Strings:
         self.mb_anagram = self.isAnagram(s='anagram', t='nagaram')
         self.mb_patern = self.wordPattern(pattern='abba', words='dog cat cat dog')
         self.m_len_of_last_word = self.lengthOfLastWord(s='a ')
+        self.m_ransom_note=self.canConstruct(ransomNote='aa', magazine='ab')
+        self.m_ransom_note_count=self.canConstruct_using_count(ransomNote='fffbfg', magazine="effjfggbffjdgbjjhhdegh")
+
+    def canConstruct(self, ransomNote: str, magazine: str) -> bool:#does not work for ransome='aa', magaizne='ab'
+            l_ransom_note = list(ransomNote)
+            l_magazin = list(magazine)
+            b_results=all(ch in l_magazin for ch in l_ransom_note)
+            return b_results
+
+    def canConstruct_using_count(self, ransomNote: str, magazine: str) -> bool: #does not work
+        i_number_of_substrings=magazine.count(ransomNote)
+        if i_number_of_substrings==0:
+            return False
+        else:
+            return True
+
+
+
 
 
     def merge_alternatively(self, s1, s2):
@@ -159,18 +177,37 @@ class Arrays:
         self.i_scheduling_cost = self.twoCitySchedCost(
             costs=[[10, 20], [30, 200], [10, 80], [90, 120], [400, 50], [30, 20]])
         self.m_majority = self.majorityElement(nums=[2, 2, 1, 1, 1, 2, 2, 5, 5, 5, 5, 5])  # 169
-        self.mint_single_numb = self.singleNumber(nums=[1, 2, 1, 2, 4])
+        self.m_int_single_numb = self.singleNumber(nums=[1, 2, 1, 2, 4])
+        self.m_duplicators = self.containsDuplicate(a_list=[3, 6, 7, 3, 3, 5])
+        #self.m_without_duplicates = self.removeDuplicates(a_list=[3,3, 4,5,7,7,8,8,10])
+        self.m_zero_push = self.moveZeroes([0, 1, 0, 3, 12])
 
+     #27. Remove Element
 
-     #283. Move Zeroes
+    # 283. Move Zeroes
     def moveZeroes(self, nums: List[int]) -> None:
+        pointer = 0
+        for i in range(len(nums)):
+            if nums[i] != 0:
+                self.swap(u=i, w=pointer, array=nums)
+                pointer += 1
+
+    def swap(self, u, w, array):
+        array[u], array[w] = array[w], array[u]
+
+    # 26. Remove Duplicates from Sorted Array
+    # def removeDuplicates(self, a_list: List[int]) -> int:
+    #     l = len(a_list)
+    #     for i in range(l-1):
+    #         if a_list[i] == a_list[i + 1]:
+    #             del a_list[i]
+    #             l-=1
+    #     return l
 
 
 
-
-    # 217. Contains Duplicate
-
-    def containsDuplicate(self, a_list:List[List])->bool:
+    #variation of 217 where we are supposed to
+    def containsDuplicate(self, a_list: List[int]) -> bool:
         l = len(a_list)
         if (l < 2):
             return False
@@ -313,6 +350,21 @@ class Math:
         self.b_happy_numbers = self.isHappy(n=34)  # 202
         self.mb_is_int_palin = self.isPalindrome(x=1)  # 9
         self.mi_complement = self.findComplement(num=7)  # 476
+        self.m_int_of_sqr=self.mySqrt(x=21)
+
+    # 69. Sqrt(x)
+    def mySqrt(self, x: int) -> int:
+        left=0
+        right=x
+        while left<=right:
+            mid=(left+right)//2
+            mid_sqr=mid*mid
+            if mid_sqr>x:
+                right=mid-1
+            else:
+                left=mid+1
+        return left -1
+
 
     def myPow(self, x: float, n: int) -> float:
         if x == 1 or n == 0:
