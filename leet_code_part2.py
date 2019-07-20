@@ -1,6 +1,7 @@
 from typing import List
 import numpy as np
 from collections import Counter
+from math import *
 
 
 class Strings:
@@ -366,9 +367,60 @@ class Math:
         self.mi_complement = self.findComplement(num=7)  # 476
         self.m_int_of_sqr = self.mySqrt(x=21)
         self.mb_pow_of3 = self.isPowerOfThree(n=9)
+        self.mint_reach = self.reachNumber(target=2)
+        self.mbol_perfect_number=self.all_divisors(number=28)
 
-    # reach
-    def
+    # 754 Reach a Number
+    def reachNumber(self, target: int) -> int:  # TLE i think that due to this while loop to find n
+        if target < 0:
+            target = - target
+        l_numbers = []
+        i = 1
+        partial_sum = sum(l_numbers)
+        while partial_sum < target:
+            l_numbers.append(i)
+            i += 1
+            partial_sum = sum(l_numbers)
+        n = l_numbers[-1]
+        to_substract = partial_sum - target
+        if to_substract % 2 == 0:  # missng part is even
+            return n  # 1+2+3+...+i+...+n. we only need to replace i on -i
+        elif to_substract % 2 == 1 and (n + 1) % 2 == 1:
+            return n + 1
+        elif to_substract % 2 == 1 and (n + 1) % 2 == 0:
+            return n + 2
+
+    # 754 Reach a Number variant 2
+    def reachNumber_using_n_approxim(self, target: int) -> int:#it does not work wrong answer for target =3 and only 13/73
+        if target < 0:
+            target = - target
+        n = math.floor(math.sqrt(target))
+        partial_sum = n * (n + 1) / 2
+        to_substract = partial_sum - target
+        if to_substract % 2 == 0:  # missng part is even
+            return n  # 1+2+3+...+i+...+n. we only need to replace i on -i
+        elif to_substract % 2 == 1 and (n + 1) % 2 == 1:
+            return n + 1
+        elif to_substract % 2 == 1 and (n + 1) % 2 == 0:
+            return n + 2
+
+     #507. Perfect Number
+    #helper functions
+    def all_divisors(self,number):
+        l_divisors=[]
+        for i in range(number):
+            if number % i==0:
+                l_divisors.append(i)
+        return l_divisors
+
+    def checkPerfectNumber(self, num: int) -> bool:
+        int_divisorsSum=sum(self.all_divisors(number=num))
+        if int_divisorsSum==num:
+            return True
+        else:
+            return False
+
+
 
     def isPowerOfThree(self, n: int) -> bool:
         if n == 0:
