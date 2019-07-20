@@ -1,7 +1,6 @@
 from typing import List
 import numpy as np
 from collections import Counter
-from math import *
 
 
 class Strings:
@@ -368,8 +367,14 @@ class Math:
         self.m_int_of_sqr = self.mySqrt(x=21)
         self.mb_pow_of3 = self.isPowerOfThree(n=9)
         self.mint_reach = self.reachNumber(target=2)
-        self.mbol_perfect_number=self.all_divisors(number=28)
+        self.mbol_perfect_number = self.checkPerfectNumber(num=8128)
+        self.l_divisors = self.all_divisors_with_sqrt(10 ** 10)
 
+    ##########################################################################################################
+    ##################################----FUNCTIONS----######################################################
+    ##########################################################################################################
+
+    ##########################################################################################################
     # 754 Reach a Number
     def reachNumber(self, target: int) -> int:  # TLE i think that due to this while loop to find n
         if target < 0:
@@ -391,7 +396,8 @@ class Math:
             return n + 2
 
     # 754 Reach a Number variant 2
-    def reachNumber_using_n_approxim(self, target: int) -> int:#it does not work wrong answer for target =3 and only 13/73
+    def reachNumber_using_n_approxim(self,
+                                     target: int) -> int:  # it does not work wrong answer for target =3 and only 13/73
         if target < 0:
             target = - target
         n = math.floor(math.sqrt(target))
@@ -404,21 +410,47 @@ class Math:
         elif to_substract % 2 == 1 and (n + 1) % 2 == 0:
             return n + 2
 
-     #507. Perfect Number
-    #helper functions
-    def all_divisors(self,number):
-        l_divisors=[]
-        for i in range(number):
-            if number % i==0:
+    ##########################################################################################################
+
+    ##########################################################################################################
+
+    # 507. Perfect Number
+
+    # helper functions
+    def all_divisors(self, number):
+        l_divisors = []
+        for i in range(1, number):
+            if number % i == 0:
                 l_divisors.append(i)
         return l_divisors
 
-    def checkPerfectNumber(self, num: int) -> bool:
-        int_divisorsSum=sum(self.all_divisors(number=num))
-        if int_divisorsSum==num:
+    def all_divisors_with_sqrt(self, number):  # more optimal solution without last divisor.
+        l_divisors = []
+        for i in range(2, int(number ** 0.5) + 1):
+            if number % i == 0:
+                l_divisors.append(i)
+                l_divisors.append(int(number / i))
+        return [1] + l_divisors
+
+    def checkPerfectNumber(self, num: int) -> bool:  # TLE 45 / 156 test cases passed.
+        int_divisorsSum = sum(self.all_divisors_with_sqrt(number=num))
+        if int_divisorsSum == num:
             return True
         else:
             return False
+
+    def checkPerfectNumberAccepted(self, num: int) -> bool:
+        if num < 0:
+            return False
+        if num == 1:
+            return False
+        int_divisorsSum = sum(self.all_divisors_with_sqrt(number=num))
+        if int_divisorsSum == num:
+            return True
+        else:
+            return False
+
+    ##########################################################################################################
 
 
 
