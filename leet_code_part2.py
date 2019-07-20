@@ -13,40 +13,41 @@ class Strings:
         self.mb_anagram = self.isAnagram(s='anagram', t='nagaram')
         self.mb_patern = self.wordPattern(pattern='abba', words='dog cat cat dog')
         self.m_len_of_last_word = self.lengthOfLastWord(s='a ')
-        self.m_ransom_note=self.canConstruct(ransomNote='aa', magazine='ab')
-        self.m_ransom_note_count=self.canConstruct_using_count(ransomNote='fffbfg', magazine="effjfggbffjdgbjjhhdegh")
-        self.m_ransom_note_count=self.canConstruct_using_dict(ransomNote='fffbfg', magazine="effjfggbffjdgbjjhhdegh")
+        self.m_ransom_note = self.canConstruct(ransomNote='aa', magazine='ab')
+        self.m_ransom_note_count = self.canConstruct_using_count(ransomNote='fffbfg', magazine="effjfggbffjdgbjjhhdegh")
+        self.m_ransom_note_dict = self.canConstruct_using_dict(ransomNote='fffbfg', magazine="effjfggbffjdgbjjhhdegh")
 
+    def canConstruct(self, ransomNote: str, magazine: str) -> bool:  # does not work for ransome='aa', magaizne='ab'
+        l_ransom_note = list(ransomNote)
+        l_magazin = list(magazine)
+        b_results = all(ch in l_magazin for ch in l_ransom_note)
+        return b_results
 
-
-
-    def canConstruct(self, ransomNote: str, magazine: str) -> bool:#does not work for ransome='aa', magaizne='ab'
-            l_ransom_note = list(ransomNote)
-            l_magazin = list(magazine)
-            b_results=all(ch in l_magazin for ch in l_ransom_note)
-            return b_results
-
-    def canConstruct_using_count(self, ransomNote: str, magazine: str) -> bool: #does not work
-        i_number_of_substrings=magazine.count(ransomNote)
-        if i_number_of_substrings==0:
+    def canConstruct_using_count(self, ransomNote: str, magazine: str) -> bool:  # does not work
+        i_number_of_substrings = magazine.count(ransomNote)
+        if i_number_of_substrings == 0:
             return False
         else:
             return True
-    #dictionary approach
+
+    # dictionary approach
 
     def canConstruct_using_dict(self, ransomNote: str, magazine: str) -> bool:
-        dic_magaz={}
-        dic_ransom={}
-
+        dic_magaz = {}
+        dic_ransom = {}
         for ch in magazine:
-            dic_magaz[ch]=dic_magaz.get(ch,0)+1
+            dic_magaz[ch] = dic_magaz.get(ch, 0) + 1
         for ch in ransomNote:
-            dic_ransom[ch]=dic_ransom.get(ch,0)+1
-        return False
-
-
-
-
+            dic_ransom[ch] = dic_ransom.get(ch, 0) + 1
+        for letter in dic_ransom:
+            if letter not in dic_magaz:
+                return False
+            else:
+                if dic_magaz[letter] < dic_ransom[
+                    letter]:  # if in magazin is less number of specific letter also we are not
+                    # able to construct ransom notice
+                    return False
+        return True
 
     def merge_alternatively(self, s1, s2):
         result = ""
@@ -194,10 +195,10 @@ class Arrays:
         self.m_majority = self.majorityElement(nums=[2, 2, 1, 1, 1, 2, 2, 5, 5, 5, 5, 5])  # 169
         self.m_int_single_numb = self.singleNumber(nums=[1, 2, 1, 2, 4])
         self.m_duplicators = self.containsDuplicate(a_list=[3, 6, 7, 3, 3, 5])
-        #self.m_without_duplicates = self.removeDuplicates(a_list=[3,3, 4,5,7,7,8,8,10])
+        # self.m_without_duplicates = self.removeDuplicates(a_list=[3,3, 4,5,7,7,8,8,10])
         self.m_zero_push = self.moveZeroes([0, 1, 0, 3, 12])
 
-     #27. Remove Element
+    # 27. Remove Element
 
     # 283. Move Zeroes
     def moveZeroes(self, nums: List[int]) -> None:
@@ -219,9 +220,7 @@ class Arrays:
     #             l-=1
     #     return l
 
-
-
-    #variation of 217 where we are supposed to
+    # variation of 217 where we are supposed to
     def containsDuplicate(self, a_list: List[int]) -> bool:
         l = len(a_list)
         if (l < 2):
@@ -365,21 +364,40 @@ class Math:
         self.b_happy_numbers = self.isHappy(n=34)  # 202
         self.mb_is_int_palin = self.isPalindrome(x=1)  # 9
         self.mi_complement = self.findComplement(num=7)  # 476
-        self.m_int_of_sqr=self.mySqrt(x=21)
+        self.m_int_of_sqr = self.mySqrt(x=21)
+        self.mb_pow_of3 = self.isPowerOfThree(n=9)
+
+    # reach
+    def
+
+    def isPowerOfThree(self, n: int) -> bool:
+        if n == 0:
+            return True
+        left = 0
+        right = n
+        while left <= right:
+            mid = (left + right) // 2
+            mid_cube = mid * mid * mid
+            if n == mid_cube:
+                return True
+            if mid_cube > n:
+                right = mid - 1
+            else:
+                left = mid + 1
+        return False
 
     # 69. Sqrt(x)
     def mySqrt(self, x: int) -> int:
-        left=0
-        right=x
-        while left<=right:
-            mid=(left+right)//2
-            mid_sqr=mid*mid
-            if mid_sqr>x:
-                right=mid-1
+        left = 0
+        right = x
+        while left <= right:
+            mid = (left + right) // 2
+            mid_sqr = mid * mid
+            if mid_sqr > x:
+                right = mid - 1
             else:
-                left=mid+1
-        return left -1
-
+                left = mid + 1
+        return left - 1
 
     def myPow(self, x: float, n: int) -> float:
         if x == 1 or n == 0:
@@ -453,6 +471,7 @@ class Math:
 class DynamicProgramming:
     def __init__(self):
         self.m_house_rober = self.rob(nums=[1, 3, 1])
+        self.mi_min_coins_number = self.coinChange(coins=[2], amount=3)
 
     def rob(self, nums: List[int]) -> int:
         if not nums:
@@ -468,6 +487,17 @@ class DynamicProgramming:
             for i in range(2, len(nums)):
                 total_robbed[i] = max(nums[i] + total_robbed[i - 2], total_robbed[i - 1])
             return total_robbed[-1]
+
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        l_dp = [float('inf')] * (amount + 1)
+        l_dp[0] = 0
+        for x in range(1, amount + 1):
+            for coin in coins:
+                if x >= coin:
+                    l_dp[x] = min(l_dp[x], 1 + l_dp[x - coin])
+        if l_dp[amount] == float('inf'):
+            return -1
+        return l_dp[amount]
 
 
 ######################################----SOLUTIONS----#####################################################
