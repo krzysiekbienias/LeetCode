@@ -44,7 +44,7 @@ class Strings:
         ############################################---- ----#########################################################
 
         ############################################---- ----#########################################################
-        self.mlint_large_group = self.largeGroupPositions(S='abbxxxxzzy')
+        self.mlint_large_group = self.largeGroupPositions(S='aaa')
         ############################################---- ----#########################################################
 
     #######################################---- 830. Positions of Large Groups----################################
@@ -84,14 +84,15 @@ class Strings:
         beg = 0
         end = 0
         while end < len(S):
-            if end - beg > 3:
-                groups.append([beg, end - 1])
-            beg = end
-        else:
-            end += 1
+            if S[end] != S[beg]:
+                if end - beg >= 3:
+                    groups.append([beg, end - 1])
+                beg = end
+            else:
+                end += 1
+        if end - beg >= 3:
+            groups.append([beg, end - 1])
         return groups
-
-        return [[d_large_group]]
 
     #######################################---- 830. Positions of Large Groups----################################
 
@@ -267,6 +268,7 @@ class Strings:
             return True
         else:
             return False
+
     #######################################---- 290. Word Pattern ---################################
 
     #######################################---- 58. Length of Last Word ---################################
@@ -308,6 +310,7 @@ class Arrays:
 
     def swap(self, u, w, array):
         array[u], array[w] = array[w], array[u]
+
     #######################################---- 283. Move Zeroes ----################################
 
     # 26. Remove Duplicates from Sorted Array
