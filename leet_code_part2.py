@@ -129,6 +129,9 @@ class Strings:
                     return False
         return True
 
+    #######################################---- 383 Ransom Note----################################
+
+    #######################################---- Merge Alternatively----################################
     def merge_alternatively(self, s1, s2):
         result = ""
         s1_split = list(s1)
@@ -145,7 +148,7 @@ class Strings:
             result = "".join(s2_split)
         return result
 
-    #######################################---- 383 Ransom Note ----################################
+    #######################################---- Merge Alternatively----################################
 
     #######################################---- 3657. Robot Return to Origin ---################################
 
@@ -169,8 +172,6 @@ class Strings:
     #######################################---- 3657. Robot Return to Origin ---################################
 
     #######################################---- 387. First Unique Character in a String ---################################
-    # 387. First Unique Character in a String
-
     def first_non_repeting_char(self, s):
         if s == "":
             return -1
@@ -187,19 +188,21 @@ class Strings:
                 first_ch = ch
                 index_of_first_ch = s.index(first_ch)
                 return index_of_first_ch
-        #######################################---- 387. First Unique Character in a String ---################################
 
-        # 1002. Find Common Characters
+    #######################################---- 387. First Unique Character in a String ---################################
+
+    #######################################---- 1002. Find Common Characters ---################################
 
     def commonChars(self, A: List[str]) -> List[str]:
         common_count = Counter(A[0])
         for i in A:  # i is a string
             counter = Counter(i)
             common_count &= counter  # &= return object common_count keeping only elements also fund in following strings
-
         return list(common_count.elements())
 
-        # 13. Roman to Integer
+    #######################################---- 1002. Find Common Characters ---################################
+
+    #######################################---- 13. Roman to Integer ---################################
 
     def romanToInt(self, roman: str) -> int:
         dic_transorm = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
@@ -212,7 +215,9 @@ class Strings:
         int_converted += dic_transorm[roman[-1]]
         return int_converted
 
-    # 1078. Occurrences After Bigram
+    #######################################---- 13. Roman to Integer ---################################
+
+    #######################################---- 1078. Occurrences After Bigram ---################################
 
     def findOcurrences(self, text: str, first: str, second: str) -> List[str]:
 
@@ -226,7 +231,9 @@ class Strings:
             return []
         return mapping[current_keys]
 
-    # 242. Valid Anagram
+    #######################################---- 1078. Occurrences After Bigram ---################################
+
+    #######################################---- 242. Valid Anagram ---################################
 
     def isAnagram(self, s: str, t: str) -> bool:
         dics = {}
@@ -242,7 +249,9 @@ class Strings:
         else:
             return False
 
-    # 290. Word Pattern
+    #######################################---- 242. Valid Anagram ---################################
+
+    #######################################---- 290. Word Pattern ---################################
     # hint check if there is a bijection between values of dictionaries
     def wordPattern(self, pattern: str, words: str) -> bool:
         dic_pattern = {}
@@ -258,8 +267,10 @@ class Strings:
             return True
         else:
             return False
+    #######################################---- 290. Word Pattern ---################################
 
-    # 58. Length of Last Word
+    #######################################---- 58. Length of Last Word ---################################
+
     def lengthOfLastWord(self, s: str) -> int:  # does not work for 'a '
         if (len(s) == 1 and s != " "):
             return 1
@@ -268,6 +279,7 @@ class Strings:
         l_words = s.split(' ')
         last_word = l_words[-1]
         return len(last_word)
+    #######################################---- 58. Length of Last Word ---################################
 
 
 class Arrays:
@@ -285,7 +297,7 @@ class Arrays:
         self.m_zero_push = self.moveZeroes([0, 1, 0, 3, 12])
 
     # 27. Remove Element
-
+    #######################################---- 283. Move Zeroes ----################################
     # 283. Move Zeroes
     def moveZeroes(self, nums: List[int]) -> None:
         pointer = 0
@@ -296,6 +308,7 @@ class Arrays:
 
     def swap(self, u, w, array):
         array[u], array[w] = array[w], array[u]
+    #######################################---- 283. Move Zeroes ----################################
 
     # 26. Remove Duplicates from Sorted Array
     # def removeDuplicates(self, a_list: List[int]) -> int:
