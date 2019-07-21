@@ -17,6 +17,8 @@ class Strings:
         self.m_ransom_note_count = self.canConstruct_using_count(ransomNote='fffbfg', magazine="effjfggbffjdgbjjhhdegh")
         self.m_ransom_note_dict = self.canConstruct_using_dict(ransomNote='fffbfg', magazine="effjfggbffjdgbjjhhdegh")
 
+    #830. Positions of Large Groups
+
     def canConstruct(self, ransomNote: str, magazine: str) -> bool:  # does not work for ransome='aa', magaizne='ab'
         l_ransom_note = list(ransomNote)
         l_magazin = list(magazine)
@@ -30,7 +32,7 @@ class Strings:
         else:
             return True
 
-    # dictionary approach
+    # dictionary approach-Accepted
 
     def canConstruct_using_dict(self, ransomNote: str, magazine: str) -> bool:
         dic_magaz = {}
