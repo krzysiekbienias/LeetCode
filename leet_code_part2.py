@@ -5,20 +5,98 @@ from collections import Counter
 
 class Strings:
     def __init__(self):
+        ############################################---- ----#########################################################
         self.mf_robot = self.judgeCircle(moves='UUDR')
+        ############################################---- ----#########################################################
+
+        ############################################---- ----#########################################################
         self.mls_common_carr = self.commonChars(A=['mercedes', 'playstation'])
+        ############################################---- ----#########################################################
+
+        ############################################---- ----#########################################################
         self.m_roman_converted = self.romanToInt(roman='VIII')  # 657
+        ############################################---- ----#########################################################
+
+        ############################################---- ----#########################################################
         self.mint_first_non_repetingch = self.first_non_repeting_char(s="aadaada")
+        ############################################---- ----#########################################################
+
+        ############################################---- ----#########################################################
         self.ml_thirdword = self.findOcurrences(text="we will we will rock you", first="we", second="will")  # 1078
+        ############################################---- ----#########################################################
+
+        ############################################---- ----#########################################################
         self.mb_anagram = self.isAnagram(s='anagram', t='nagaram')
+        ############################################---- ----#########################################################
+
+        ############################################---- ----#########################################################
         self.mb_patern = self.wordPattern(pattern='abba', words='dog cat cat dog')
+        ############################################---- ----#########################################################
+
+        ############################################---- ----#########################################################
         self.m_len_of_last_word = self.lengthOfLastWord(s='a ')
+        ############################################---- ----#########################################################
+
+        ############################################---- ----#########################################################
         self.m_ransom_note = self.canConstruct(ransomNote='aa', magazine='ab')
         self.m_ransom_note_count = self.canConstruct_using_count(ransomNote='fffbfg', magazine="effjfggbffjdgbjjhhdegh")
         self.m_ransom_note_dict = self.canConstruct_using_dict(ransomNote='fffbfg', magazine="effjfggbffjdgbjjhhdegh")
+        ############################################---- ----#########################################################
 
-    #830. Positions of Large Groups
+        ############################################---- ----#########################################################
+        self.mlint_large_group = self.largeGroupPositions(S='abbxxxxzzy')
+        ############################################---- ----#########################################################
 
+    #######################################---- 830. Positions of Large Groups----################################
+    # helper function to get key based on value. It does not help
+
+    def getKeysByValue(self, dict, target_value: int, condition: str) -> List[int]:
+        l_listOfKeys = []
+        l_listOfItems = list(dict.items())  # It needs to be casted on list because'dict_items' object
+        # does not support indexing
+        for item in l_listOfItems:
+            if condition == 'equal':
+                if item[1] == target_value:
+                    l_listOfKeys.append(item[0])
+            if condition == 'graterOrEqual':
+                if item[1] >= target_value:
+                    l_listOfKeys.append(item[0])
+            if condition == 'grater':
+                if item[1] > target_value:
+                    l_listOfKeys.append(item[0])
+            if condition == 'less':
+                if item[1] < target_value:
+                    l_listOfKeys.append(item[0])
+            if condition == 'lessOrEqual':
+                if item[1] <= target_value:
+                    l_listOfKeys.append(item[0])
+        return l_listOfKeys
+
+    def largeGroupPositionsNotFinished(self, S: str) -> List[
+        List[int]]:  # using this approach it would be hard to get what we want
+        d_box = {}
+        for ch in S:
+            d_box[ch] = d_box.get(ch, 0) + 1
+        d_large_group = self.getKeysByValue(dict=d_box, target_value=3, condition='graterOrEqual')
+
+    def largeGroupPositions(self, S: str) -> List[List[int]]:
+        groups = []
+        beg = 0
+        end = 0
+        while end < len(S):
+            if end - beg > 3:
+                groups.append([beg, end - 1])
+            beg = end
+        else:
+            end += 1
+        return groups
+
+        return [[d_large_group]]
+
+    #######################################---- 830. Positions of Large Groups----################################
+
+    #######################################---- 383 Ransom Note----################################
+    # 383 Ransom Note
     def canConstruct(self, ransomNote: str, magazine: str) -> bool:  # does not work for ransome='aa', magaizne='ab'
         l_ransom_note = list(ransomNote)
         l_magazin = list(magazine)
@@ -67,7 +145,9 @@ class Strings:
             result = "".join(s2_split)
         return result
 
-    # 657. Robot Return to Origin
+    #######################################---- 383 Ransom Note ----################################
+
+    #######################################---- 3657. Robot Return to Origin ---################################
 
     def judgeCircle(self, moves: str) -> bool:
         x = y = 0
@@ -86,7 +166,10 @@ class Strings:
         else:
             return False
 
-        # 387. First Unique Character in a String
+    #######################################---- 3657. Robot Return to Origin ---################################
+
+    #######################################---- 387. First Unique Character in a String ---################################
+    # 387. First Unique Character in a String
 
     def first_non_repeting_char(self, s):
         if s == "":
@@ -104,6 +187,7 @@ class Strings:
                 first_ch = ch
                 index_of_first_ch = s.index(first_ch)
                 return index_of_first_ch
+        #######################################---- 387. First Unique Character in a String ---################################
 
         # 1002. Find Common Characters
 
@@ -453,8 +537,6 @@ class Math:
             return False
 
     ##########################################################################################################
-
-
 
     def isPowerOfThree(self, n: int) -> bool:
         if n == 0:
