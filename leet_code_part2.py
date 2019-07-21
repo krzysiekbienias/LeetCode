@@ -471,31 +471,27 @@ class Math:
         self.mint_reach = self.reachNumber(target=2)
         self.mbol_perfect_number = self.checkPerfectNumber(num=8128)
         self.l_divisors = self.all_divisors_with_sqrt(10 ** 10)
-        self.mb_isBoom=self.isBoomerang(points=[[0,0],[0,2],[2,1]])
+        self.mb_isBoom = self.isBoomerang(points=[[0, 0], [0, 2], [2, 1]])
 
     ##########################################################################################################
     ##################################----FUNCTIONS----######################################################
     ##########################################################################################################
 
     #######################################---- 1037. Valid Boomerang ----################################
-    def isBoomerang(self, points: List[List[int]]) -> bool: #division by zero error for [[0,0],[0,2],[2,1]] and only
-        # 2/190 test passed.
-        l_aParameters=[]
-        for i in range(len(points)-1):
-            for j in  range(i+1,len(points)):
+    def isBoomerang(self, points: List[List[int]]) -> bool:
+        l_aParameters = []
+        for i in range(len(points) - 1):
+            for j in range(i + 1, len(points)):
                 try:
-                   a=(points[i][1]-points[j][1])/(points[i][0]-points[j][0])
+                    a = (points[i][1] - points[j][1]) / (points[i][0] - points[j][0])
                 except ZeroDivisionError:
-                   a=float('-inf')
+                    a = float('-inf')
                 l_aParameters.append(a)
-        se=set(l_aParameters)
-        if len(se)==len(points):
+        se = set(l_aParameters)
+        if len(se) == len(points):
             return True
         else:
             return False
-
-
-
 
     #######################################---- 1037. Valid Boomerang ----################################
 
