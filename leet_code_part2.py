@@ -297,10 +297,31 @@ class Arrays:
         self.m_duplicators = self.containsDuplicate(a_list=[3, 6, 7, 3, 3, 5])
         # self.m_without_duplicates = self.removeDuplicates(a_list=[3,3, 4,5,7,7,8,8,10])
         self.m_zero_push = self.moveZeroes([0, 1, 0, 3, 12])
+        self.mlintFirstEven=self.sortArrayByParity(A=[3,1,2,4])
+        self.mlintSquares=self.sortedSquares(A=[-4,-1,0,3,10])
 
-    # 27. Remove Element
+    #######################################---- 977. Squares of a Sorted Array ----################################
+    def sortedSquares(self, A: List[int]) -> List[int]:
+        squared = lambda x: x ** 2
+        results = list(map(squared,A))
+        results.sort()
+        return results
+    #######################################---- 977. Squares of a Sorted Array----################################
+
+
+    #######################################---- 905. Sort Array By Parity ----################################
+    def sortArrayByParity(self, A: List[int]) -> List[int]:
+        l_even = []
+        l_odd = []
+        for i in A:
+            if i % 2 == 0:
+                l_even.append(i)
+            else:
+                l_odd.append(i)
+        return l_even + l_odd
+        #######################################---- 905. Sort Array By Parity ----################################
+
     #######################################---- 283. Move Zeroes ----################################
-    # 283. Move Zeroes
     def moveZeroes(self, nums: List[int]) -> None:
         pointer = 0
         for i in range(len(nums)):
@@ -472,14 +493,80 @@ class Math:
         self.mbol_perfect_number = self.checkPerfectNumber(num=8128)
         self.l_divisors = self.all_divisors_with_sqrt(10 ** 10)
         self.mb_isBoom = self.isBoomerang(points=[[0, 0], [0, 2], [2, 1]])
-        self.mlint_errorNumber=self.findErrorNums(nums=[1,2,2,4])
+        self.mlint_errorNumber = self.findErrorNums(nums=[3,2,2])
+        self.mlintDividing = self.selfDividingNumbers(left=1, right=12)
+        self.mb_selfDividing = self.CheckSingleNumber('128')
 
     ##########################################################################################################
     ##################################----FUNCTIONS----######################################################
     ##########################################################################################################
 
+    #######################################---- 728. Self Dividing Numbers ----################################
+    # helper number
+    def CheckSingleNumber(self, aStr):
+        b_status = True
+        ls_digits = list(aStr)
+        for i in ls_digits:
+            if int(i) == 0:
+                b_status = False
+
+            elif (int(i) != 0 and int(aStr) % int(i) != 0):
+                b_status = False
+
+        return b_status
+
+    def selfDividingNumbers(self, left: int, right: int) -> List[int]:
+        i = left
+        l_selfDividingNum = []
+        while i <= right:
+            str_converted = str(i)
+            b_temp = self.CheckSingleNumber(str_converted)
+            if b_temp == True:
+                l_selfDividingNum.append(i)
+            i += 1
+
+        return l_selfDividingNum
+
+
+    #######################################---- 728. Self Dividing Numbers ----################################
+
     #######################################---- 645. Set Mismatch ----################################
-    def findErrorNums(self, nums: List[int]) -> List[int]:
+    def getKeysByValue(self, dict, target_value: int, condition: str) -> List[int]:
+        l_listOfKeys = []
+        l_listOfItems = list(dict.items())  # It needs to be casted on list because'dict_items' object
+        # does not support indexing
+        for item in l_listOfItems:
+            if condition == 'equal':
+                if item[1] == target_value:
+                    l_listOfKeys.append(item[0])
+            if condition == 'graterOrEqual':
+                if item[1] >= target_value:
+                    l_listOfKeys.append(item[0])
+            if condition == 'grater':
+                if item[1] > target_value:
+                    l_listOfKeys.append(item[0])
+            if condition == 'less':
+                if item[1] < target_value:
+                    l_listOfKeys.append(item[0])
+            if condition == 'lessOrEqual':
+                if item[1] <= target_value:
+                    l_listOfKeys.append(item[0])
+        return l_listOfKeys
+
+    def findErrorNums(self, nums: List[int]) -> List[int]:  # 7 / 49 test cases passed. First problem with [2,2]
+        d = {}
+        for i in nums:
+            d[i] = d.get(i, 0) + 1
+        duplicated_number = self.getKeysByValue(dict=d, target_value=2, condition='equal')
+        if len(nums)==2:
+            if duplicated_number[0]==1:
+                return [duplicated_number[0],duplicated_number[0]+1]
+            else:
+                return [duplicated_number[0],1]
+        else:
+            missing_number=duplicated_number[0]+1
+        return [duplicated_number[0], missing_number]
+
     #######################################---- 645. Set Mismatch ----################################
 
     #######################################---- 1037. Valid Boomerang ----################################
