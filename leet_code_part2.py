@@ -47,6 +47,36 @@ class Strings:
         self.mlint_large_group = self.largeGroupPositions(S='aaa')
         ############################################---- ----#########################################################
 
+        ############################################---- ----#########################################################
+        self.groups=self.strings_splits(s='110001111000000')
+        self.m_substrings=self.countBinarySubstrings(s='110001111000000')
+        ############################################---- ----#########################################################
+
+    #######################################---- 696. Count Binary Substrings----################################
+    #helper function that split strings into groups
+    def strings_splits(self,s:str)->List[int]:
+        groups=[1]
+        for i in range(1,len(s)):
+            if s[i-1]!=s[i]:
+                groups.append(1)
+            else:
+                groups[-1]+=1
+        return groups
+
+
+    def countBinarySubstrings(self, s: str) -> int:
+        groups=self.strings_splits(s=s)
+        res=0
+        for i in range(1,len(groups)):
+            res+=min(groups[i-1],groups[i])
+        return res
+
+
+    #######################################---- 696. Count Binary Substrings----################################
+
+
+
+
     #######################################---- 830. Positions of Large Groups----################################
     # helper function to get key based on value. It does not help
 
@@ -299,6 +329,23 @@ class Arrays:
         self.m_zero_push = self.moveZeroes([0, 1, 0, 3, 12])
         self.mlintFirstEven=self.sortArrayByParity(A=[3,1,2,4])
         self.mlintSquares=self.sortedSquares(A=[-4,-1,0,3,10])
+        self.mintHighCheck=self.heightChecker(heights=[2,1,2,1,1,2,2,1])
+
+
+
+    #######################################---- 1051. Height Checker----################################
+    def heightChecker(self, heights: List[int]) -> int: #brute force
+        wrong_standing=0
+        for i in range(len(heights)-1):
+            for j in range(i+1,len(heights)):
+                if heights[i]>heights[j]:
+                    wrong_standing+=1
+        return wrong_standing
+
+
+
+
+    #######################################---- 1051. Height Checker----################################
 
     #######################################---- 977. Squares of a Sorted Array ----################################
     def sortedSquares(self, A: List[int]) -> List[int]:

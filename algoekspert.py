@@ -20,6 +20,26 @@ class Arrays:
             elif current_sum > target:
                 r_pointer -= 1
         return []
+    #O(n^2)|O(n)
+    def three_number_sum(self, array,target):
+        array.sort()
+        triplets=[]
+        for i in range (len(array)-2): #last two numbers  will be left and right pointer
+            leftPointer=i+1
+            rightPointer=len(array)-1
+            while leftPointer<rightPointer: # do until pointers don't overlap each other
+                currentSum=array[i]+array[leftPointer]+array[rightPointer]
+                if currentSum==target:
+                    triplets.append([array[i],array[leftPointer],array[rightPointer]])
+                    leftPointer+=1
+                    rightPointer-=1
+                elif currentSum<target:
+                    leftPointer+=1
+                elif currentSum>target:
+                    rightPointer-=1
+        return triplets
+
+
 
 
 class Sorting:
