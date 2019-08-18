@@ -48,34 +48,29 @@ class Strings:
         ############################################---- ----#########################################################
 
         ############################################---- ----#########################################################
-        self.groups=self.strings_splits(s='110001111000000')
-        self.m_substrings=self.countBinarySubstrings(s='110001111000000')
+        self.groups = self.strings_splits(s='110001111000000')
+        self.m_substrings = self.countBinarySubstrings(s='110001111000000')
         ############################################---- ----#########################################################
 
     #######################################---- 696. Count Binary Substrings----################################
-    #helper function that split strings into groups
-    def strings_splits(self,s:str)->List[int]:
-        groups=[1]
-        for i in range(1,len(s)):
-            if s[i-1]!=s[i]:
+    # helper function that split strings into groups
+    def strings_splits(self, s: str) -> List[int]:
+        groups = [1]
+        for i in range(1, len(s)):
+            if s[i - 1] != s[i]:
                 groups.append(1)
             else:
-                groups[-1]+=1
+                groups[-1] += 1
         return groups
 
-
     def countBinarySubstrings(self, s: str) -> int:
-        groups=self.strings_splits(s=s)
-        res=0
-        for i in range(1,len(groups)):
-            res+=min(groups[i-1],groups[i])
+        groups = self.strings_splits(s=s)
+        res = 0
+        for i in range(1, len(groups)):
+            res += min(groups[i - 1], groups[i])
         return res
 
-
     #######################################---- 696. Count Binary Substrings----################################
-
-
-
 
     #######################################---- 830. Positions of Large Groups----################################
     # helper function to get key based on value. It does not help
@@ -325,37 +320,45 @@ class Arrays:
         self.m_majority = self.majorityElement(nums=[2, 2, 1, 1, 1, 2, 2, 5, 5, 5, 5, 5])  # 169
         self.m_int_single_numb = self.singleNumber(nums=[1, 2, 1, 2, 4])
         self.m_duplicators = self.containsDuplicate(a_list=[3, 6, 7, 3, 3, 5])
-        self.m_without_duplicates = self.removeDuplicates(nums=[0,0,1,1,1,2,2,3,3,4])
+        self.m_without_duplicates = self.removeDuplicates(nums=[0, 0, 1, 1, 1, 2, 2, 3, 3, 4])
         self.m_zero_push = self.moveZeroes([0, 1, 0, 3, 12])
-        self.mlintFirstEven=self.sortArrayByParity(A=[3,1,2,4])
-        self.mlintSquares=self.sortedSquares(A=[-4,-1,0,3,10])
-        self.mintHighCheck=self.heightChecker(heights=[2,1,2,1,1,2,2,1])
+        self.mlintFirstEven = self.sortArrayByParity(A=[3, 1, 2, 4])
+        self.mlintSquares = self.sortedSquares(A=[-4, -1, 0, 3, 10])
+        self.mintHighCheck = self.heightChecker(heights=[2, 1, 2, 1, 1, 2, 2, 1])
+        self.mAfterRemovingElement=self.removeElement([0,1,2,2,3,0,4,2],val=2)
 
 
+    #######################################---- 27. Remove Elements----################################
+    def removeElement(self, nums: List[int], val: int) -> int:
+        i = 0
+        while i < len(nums):
+            if nums[i] == val:
+                del nums[i]
+            else:
+                i += 1
+        return len(nums)
+    #######################################---- 27. Remove Elements----################################
 
 
     #######################################---- 1051. Height Checker----################################
-    def heightChecker(self, heights: List[int]) -> int: #brute force
-        wrong_standing=0
-        for i in range(len(heights)-1):
-            for j in range(i+1,len(heights)):
-                if heights[i]>heights[j]:
-                    wrong_standing+=1
+    def heightChecker(self, heights: List[int]) -> int:  # brute force
+        wrong_standing = 0
+        for i in range(len(heights) - 1):
+            for j in range(i + 1, len(heights)):
+                if heights[i] > heights[j]:
+                    wrong_standing += 1
         return wrong_standing
-
-
-
 
     #######################################---- 1051. Height Checker----################################
 
     #######################################---- 977. Squares of a Sorted Array ----################################
     def sortedSquares(self, A: List[int]) -> List[int]:
         squared = lambda x: x ** 2
-        results = list(map(squared,A))
+        results = list(map(squared, A))
         results.sort()
         return results
-    #######################################---- 977. Squares of a Sorted Array----################################
 
+    #######################################---- 977. Squares of a Sorted Array----################################
 
     #######################################---- 905. Sort Array By Parity ----################################
     def sortArrayByParity(self, A: List[int]) -> List[int]:
@@ -382,8 +385,8 @@ class Arrays:
 
     #######################################---- 283. Move Zeroes ----################################
 
-    #26. Remove Duplicates from Sorted Array
-    #Wrong Approach!! It is not a good idea to change a list while iterating through it. It gives index out of range.
+    # 26. Remove Duplicates from Sorted Array
+    # Wrong Approach!! It is not a good idea to change a list while iterating through it. It gives index out of range.
     # def removeDuplicates(self, a_list: List[int]) -> int:
     #     l = len(a_list)
     #     for i in range(l-1):
@@ -393,16 +396,13 @@ class Arrays:
     #     return l
 
     def removeDuplicates(self, nums: List[int]) -> int:
-        i=0
-        while i<len(nums)-1:
-            if nums[i]==nums[i+1]:
+        i = 0
+        while i < len(nums) - 1:
+            if nums[i] == nums[i + 1]:
                 del nums[i]
             else:
-                i+=1
+                i += 1
         return len(nums)
-
-
-
 
     # variation of 217 where we are supposed to
     def containsDuplicate(self, a_list: List[int]) -> bool:
@@ -554,11 +554,14 @@ class Math:
         self.mbol_perfect_number = self.checkPerfectNumber(num=8128)
         self.l_divisors = self.all_divisors_with_sqrt(10 ** 10)
         self.mb_isBoom = self.isBoomerang(points=[[0, 0], [0, 2], [2, 1]])
-        self.mlint_errorNumber = self.findErrorNums(nums=[3,2,2])
+        self.mlint_errorNumber = self.findErrorNums(nums=[3, 2, 2])
         self.mlintDividing = self.selfDividingNumbers(left=1, right=12)
         self.mb_selfDividing = self.CheckSingleNumber('128')
 
-    ##########################################################################################################
+
+
+
+      ##########################################################################################################
     ##################################----FUNCTIONS----######################################################
     ##########################################################################################################
 
@@ -587,7 +590,6 @@ class Math:
             i += 1
 
         return l_selfDividingNum
-
 
     #######################################---- 728. Self Dividing Numbers ----################################
 
@@ -619,13 +621,13 @@ class Math:
         for i in nums:
             d[i] = d.get(i, 0) + 1
         duplicated_number = self.getKeysByValue(dict=d, target_value=2, condition='equal')
-        if len(nums)==2:
-            if duplicated_number[0]==1:
-                return [duplicated_number[0],duplicated_number[0]+1]
+        if len(nums) == 2:
+            if duplicated_number[0] == 1:
+                return [duplicated_number[0], duplicated_number[0] + 1]
             else:
-                return [duplicated_number[0],1]
+                return [duplicated_number[0], 1]
         else:
-            missing_number=duplicated_number[0]+1
+            missing_number = duplicated_number[0] + 1
         return [duplicated_number[0], missing_number]
 
     #######################################---- 645. Set Mismatch ----################################
@@ -782,6 +784,7 @@ class Math:
                 l_subsets.append(curr_subset + [ele])
         return l_subsets
 
+
     #######################################---- 78. Subsets ----################################
     #######################################---- 202. Happy Number ----################################
 
@@ -875,11 +878,42 @@ class DynamicProgramming:
         return l_dp[amount]
 
 
+
+class Recursion:
+      def __init__(self):
+          self.mSubsets=self.helperSubsets(nums=[1,2,3])
+
+          # algoexpert version, needs to be tailored for leetcode
+
+      # def powerset(self, array, idx=None):  # recursive
+      #     if idx is None:
+      #         idx = len(array) - 1
+      #     elif idx < 0:
+      #         return [[]]
+      #     ele = array[idx]
+      #     subsets = self.powerset(array, idx - 1)
+      #     for i in range(len(subsets)):
+      #         current_subset = subsets[i]
+      #         subsets.append(current_subset + [ele])
+      #     return subsets
+
+      def helperSubsets(self, nums,idx=None):  # recursive
+          if idx is None:
+              idx = len(nums) - 1
+          elif idx < 0:
+              return [[]]
+          ele = nums[idx]
+          subsets = self.helperSubsets(nums,idx-1)
+          return subsets
+
+
+
 ######################################----SOLUTIONS----#####################################################
 strings_lc = Strings()
 arrays_lc = Arrays()
 searching_lc = Searching()
 math_lc = Math()
 dynamic_prog_lc = DynamicProgramming()
+recursion=Recursion()
 
 print("The end")
