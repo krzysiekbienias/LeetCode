@@ -325,11 +325,12 @@ class Arrays:
         self.m_majority = self.majorityElement(nums=[2, 2, 1, 1, 1, 2, 2, 5, 5, 5, 5, 5])  # 169
         self.m_int_single_numb = self.singleNumber(nums=[1, 2, 1, 2, 4])
         self.m_duplicators = self.containsDuplicate(a_list=[3, 6, 7, 3, 3, 5])
-        # self.m_without_duplicates = self.removeDuplicates(a_list=[3,3, 4,5,7,7,8,8,10])
+        self.m_without_duplicates = self.removeDuplicates(nums=[0,0,1,1,1,2,2,3,3,4])
         self.m_zero_push = self.moveZeroes([0, 1, 0, 3, 12])
         self.mlintFirstEven=self.sortArrayByParity(A=[3,1,2,4])
         self.mlintSquares=self.sortedSquares(A=[-4,-1,0,3,10])
         self.mintHighCheck=self.heightChecker(heights=[2,1,2,1,1,2,2,1])
+
 
 
 
@@ -381,7 +382,8 @@ class Arrays:
 
     #######################################---- 283. Move Zeroes ----################################
 
-    # 26. Remove Duplicates from Sorted Array
+    #26. Remove Duplicates from Sorted Array
+    #Wrong Approach!! It is not a good idea to change a list while iterating through it. It gives index out of range.
     # def removeDuplicates(self, a_list: List[int]) -> int:
     #     l = len(a_list)
     #     for i in range(l-1):
@@ -389,6 +391,18 @@ class Arrays:
     #             del a_list[i]
     #             l-=1
     #     return l
+
+    def removeDuplicates(self, nums: List[int]) -> int:
+        i=0
+        while i<len(nums)-1:
+            if nums[i]==nums[i+1]:
+                del nums[i]
+            else:
+                i+=1
+        return len(nums)
+
+
+
 
     # variation of 217 where we are supposed to
     def containsDuplicate(self, a_list: List[int]) -> bool:

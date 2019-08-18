@@ -107,7 +107,7 @@ class Strings():
     def camelcase(self,s): #expected output 4588, my result 4410, 15/21 test cases failed
         counter = 0
         for ch in s:
-            if ord(ch) < 90:
+            if ord(ch) <= 90:
                 counter += 1
         return counter+1 #because we need to add the first word that begins with lower letter
 
