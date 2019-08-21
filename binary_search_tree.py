@@ -59,16 +59,42 @@ class TreeNode:
                 return self.right.searchBST(value)
         return self
 
-    def preorderTraversal(self, note: TreeNode) -> List[int]:
+    def preorderTraversal(self, node: TreeNode) -> List[int]:
         def dfs(node):
             if not node:
-                return pre_order.append(node._value)
+                return
+            pre_order.append(node._value)
             dfs(node.left)
             dfs(node.right)
 
         pre_order = []
-        dfs(note)
+        dfs(node)
         return pre_order
+
+    def height(self, node:TreeNode):
+        if node is None:
+            return 0
+        else:
+            height=max(self.height(node.left), self.height(node.right)) + 1
+        return height
+
+    #level order traversal
+
+    def levelOrder(self, root):
+        result = []
+        self.helper(root, 0, result)
+        return result
+
+    def helper(self, root, level, result):
+        if root is None:
+            return
+        if len(result) <= level:
+            result.append([])
+        result[level].append(root._value)
+        self.helper(root.left, level + 1, result)
+        self.helper(root.right, level + 1, result)
+
+
 
 
 if __name__ == '__main__':
@@ -78,6 +104,8 @@ if __name__ == '__main__':
 
     # print(bst.contains(7))
     subbst = bst.searchBST(6)
-    dfsTraversal = bst.preorderTraversal(note=bst)
+    dfsTraversal = bst.preorderTraversal(node=bst)
+    bstHeight=bst.height(node=bst)
+    levelOrder=bst.levelOrder(root=bst)
 
 print("end")

@@ -52,6 +52,29 @@ class Strings:
         self.m_substrings = self.countBinarySubstrings(s='110001111000000')
         ############################################---- ----#########################################################
 
+        ############################################---- ----#########################################################
+        self.mreverseString=self.reverseString(s=["h","e","l","l","o"])
+        ############################################---- ----#########################################################
+
+
+
+    #######################################---- 344. Reverse String----################################
+    def reverseString(self, s: List[str]) -> None:
+        last_index=len(s)-1
+        for i in range(len(s)):
+            s.insert(i,s.insert(last_index)) # get the element from last index and put it at i index - 0, 1, 2 etc
+
+    def reverseStringTwoPointers(self, s: List[str]) -> None:
+        l=0
+        r=len(s)-1
+        while l<r:
+            s[l],s[r]=s[r],s[l]
+            l+=1
+            r-=-1
+        return s
+    #######################################---- 344. Reverse String----################################
+
+
     #######################################---- 696. Count Binary Substrings----################################
     # helper function that split strings into groups
     def strings_splits(self, s: str) -> List[int]:
