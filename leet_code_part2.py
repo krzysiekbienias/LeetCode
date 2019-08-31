@@ -53,27 +53,31 @@ class Strings:
         ############################################---- ----#########################################################
 
         ############################################---- ----#########################################################
-        self.mreverseString=self.reverseString(s=["h","e","l","l","o"])
+        self.mreverseString = self.reverseString(s=["h", "e", "l", "l", "o"])
         ############################################---- ----#########################################################
 
-
-
     #######################################---- 344. Reverse String----################################
-    def reverseString(self, s: List[str]) -> None:
-        last_index=len(s)-1
+    def reverseString(self, s: List[str]) -> None: #s is the list of strings
+        last_index = len(s) - 1
         for i in range(len(s)):
-            s.insert(i,s.insert(last_index)) # get the element from last index and put it at i index - 0, 1, 2 etc
+            s.insert(i, s.pop(last_index))  # get the element from last index and put it at i index - 0, 1, 2 etc
 
-    def reverseStringTwoPointers(self, s: List[str]) -> None:
-        l=0
-        r=len(s)-1
-        while l<r:
-            s[l],s[r]=s[r],s[l]
-            l+=1
-            r-=-1
+    def reverseStringTwoPointers(self, s: List[str]) -> None:#does not work
+        l = 0
+        r = len(s) - 1
+        while l < r:
+            s[l], s[r] = s[r], s[l]
+            l += 1
+            r -= -1
         return s
-    #######################################---- 344. Reverse String----################################
 
+    def reverseStringUsingList(self, s):
+        rev = []
+        for i in range(len(s) - 1, -1, -1):
+            rev.append((s[i]))
+        return "".join(rev)
+
+    #######################################---- 344. Reverse String----################################
 
     #######################################---- 696. Count Binary Substrings----################################
     # helper function that split strings into groups
@@ -348,8 +352,7 @@ class Arrays:
         self.mlintFirstEven = self.sortArrayByParity(A=[3, 1, 2, 4])
         self.mlintSquares = self.sortedSquares(A=[-4, -1, 0, 3, 10])
         self.mintHighCheck = self.heightChecker(heights=[2, 1, 2, 1, 1, 2, 2, 1])
-        self.mAfterRemovingElement=self.removeElement([0,1,2,2,3,0,4,2],val=2)
-
+        self.mAfterRemovingElement = self.removeElement([0, 1, 2, 2, 3, 0, 4, 2], val=2)
 
     #######################################---- 27. Remove Elements----################################
     def removeElement(self, nums: List[int], val: int) -> int:
@@ -360,8 +363,8 @@ class Arrays:
             else:
                 i += 1
         return len(nums)
-    #######################################---- 27. Remove Elements----################################
 
+    #######################################---- 27. Remove Elements----################################
 
     #######################################---- 1051. Height Checker----################################
     def heightChecker(self, heights: List[int]) -> int:  # brute force
@@ -567,7 +570,7 @@ class Searching:
 class Math:
     def __init__(self):
         self.m_subsets = self.subsets(l_set=[1, 2, 3])  # 78
-        self.mf_pow = self.myPow(x=2, n=4)
+        self.mf_pow = self.myPow(x=3, n=6)
         self.b_happy_numbers = self.isHappy(n=34)  # 202
         self.mb_is_int_palin = self.isPalindrome(x=1)  # 9
         self.mi_complement = self.findComplement(num=7)  # 476
@@ -581,10 +584,7 @@ class Math:
         self.mlintDividing = self.selfDividingNumbers(left=1, right=12)
         self.mb_selfDividing = self.CheckSingleNumber('128')
 
-
-
-
-      ##########################################################################################################
+    ##########################################################################################################
     ##################################----FUNCTIONS----######################################################
     ##########################################################################################################
 
@@ -786,14 +786,24 @@ class Math:
                 left = mid + 1
         return left - 1
 
+    #######################################---- 69. Sqrt(x) ----################################
+
+    #######################################---- 50. Pow(x,n ----################################
+
     def myPow(self, x: float, n: int) -> float:
         if x == 1 or n == 0:
             return 1
-        res = self.myPow(x, n // 2)
-        res = res * res
-        return res
+        if n<0:
+            return 1/self.myPow(x,-n)
+        if n%2==0:
+            return self.myPow(x*x,n//2)
+        else:
+            return self.myPow(x,n-1)*x
 
-        #######################################---- 69. Sqrt(x) ----################################
+
+    #######################################---- 50. Pow(x,n ----################################
+
+
 
         #######################################---- 78. Subsets ----################################
 
@@ -806,7 +816,6 @@ class Math:
                 curr_subset = l_subsets[i]
                 l_subsets.append(curr_subset + [ele])
         return l_subsets
-
 
     #######################################---- 78. Subsets ----################################
     #######################################---- 202. Happy Number ----################################
@@ -901,34 +910,32 @@ class DynamicProgramming:
         return l_dp[amount]
 
 
-
 class Recursion:
-      def __init__(self):
-          self.mSubsets=self.helperSubsets(nums=[1,2,3])
+    def __init__(self):
+        self.mSubsets = self.helperSubsets(nums=[1, 2, 3])
 
-          # algoexpert version, needs to be tailored for leetcode
+        # algoexpert version, needs to be tailored for leetcode
 
-      # def powerset(self, array, idx=None):  # recursive
-      #     if idx is None:
-      #         idx = len(array) - 1
-      #     elif idx < 0:
-      #         return [[]]
-      #     ele = array[idx]
-      #     subsets = self.powerset(array, idx - 1)
-      #     for i in range(len(subsets)):
-      #         current_subset = subsets[i]
-      #         subsets.append(current_subset + [ele])
-      #     return subsets
+    # def powerset(self, array, idx=None):  # recursive
+    #     if idx is None:
+    #         idx = len(array) - 1
+    #     elif idx < 0:
+    #         return [[]]
+    #     ele = array[idx]
+    #     subsets = self.powerset(array, idx - 1)
+    #     for i in range(len(subsets)):
+    #         current_subset = subsets[i]
+    #         subsets.append(current_subset + [ele])
+    #     return subsets
 
-      def helperSubsets(self, nums,idx=None):  # recursive
-          if idx is None:
-              idx = len(nums) - 1
-          elif idx < 0:
-              return [[]]
-          ele = nums[idx]
-          subsets = self.helperSubsets(nums,idx-1)
-          return subsets
-
+    def helperSubsets(self, nums, idx=None):  # recursive
+        if idx is None:
+            idx = len(nums) - 1
+        elif idx < 0:
+            return [[]]
+        ele = nums[idx]
+        subsets = self.helperSubsets(nums, idx - 1)
+        return subsets
 
 
 ######################################----SOLUTIONS----#####################################################
@@ -937,6 +944,6 @@ arrays_lc = Arrays()
 searching_lc = Searching()
 math_lc = Math()
 dynamic_prog_lc = DynamicProgramming()
-recursion=Recursion()
+recursion = Recursion()
 
 print("The end")

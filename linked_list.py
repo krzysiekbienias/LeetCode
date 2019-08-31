@@ -11,11 +11,13 @@ class MyLinkedList:
         """
         Initialize your data structure here.
         """
+        self.head=None
 
     def get(self, index: int) -> int:
         """
         Get the value of the index-th node in the linked list. If the index is invalid, return -1.
         """
+        
 
     def addAtHead(self, val: int) -> None:
         """
@@ -45,4 +47,6 @@ class MyLinkedList:
 # obj.addAtIndex(index,val)
 # obj.deleteAtIndex(index)
 
-node=ListNode(x=5)
+node=ListNode(val=[4,7,9])
+a=node.next
+print("the end")
