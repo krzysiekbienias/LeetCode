@@ -56,6 +56,24 @@ class Strings:
         self.mreverseString = self.reverseString(s=["h", "e", "l", "l", "o"])
         ############################################---- ----#########################################################
 
+        ############################################---- ----#########################################################
+        self.mFindDifference=self.findTheDifference(s='ae',t='aea')
+        ############################################---- ----#########################################################
+
+    #######################################---- 389. Find the Difference----################################
+    def findTheDifference(self, s: str, t: str) -> str:
+        s_sort=sorted(s)
+        t_sort=sorted(t)
+
+        for i in range(len(s_sort)):
+            if s_sort[i]!=t_sort[i]:
+                return t_sort[i]
+        return t_sort[-1]
+            #lChFrequency = list(dicT.values())
+
+
+    #######################################---- 389. Find the Difference----################################
+
     #######################################---- 344. Reverse String----################################
     def reverseString(self, s: List[str]) -> None: #s is the list of strings
         last_index = len(s) - 1
