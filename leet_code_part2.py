@@ -601,6 +601,7 @@ class Math:
         self.mlint_errorNumber = self.findErrorNums(nums=[3, 2, 2])
         self.mlintDividing = self.selfDividingNumbers(left=1, right=12)
         self.mb_selfDividing = self.CheckSingleNumber('128')
+        self.mFib=self.fibMemo(6)
 
     ##########################################################################################################
     ##################################----FUNCTIONS----######################################################
@@ -609,11 +610,22 @@ class Math:
     #######################################---- 509. Fibonacci Number ----################################
     def fib(self, n: int) -> int:
         if n == 1:
-            return 0
+            return 1
         elif n == 2:
             return 1
+        elif n==0:
+            return 0
         else:
             return self.fib(n - 1) + self.fib(n - 2)
+
+
+    def fibMemo(self,n,memo={1:0,2:1}):
+
+        if n in memo:
+            return memo[n]
+        else:
+            memo[n]=self.fibMemo(n-1,memo)+self.fibMemo(n-2,memo)
+        return memo[n]
     #######################################---- 509. Fibonacci Number ----################################
 
 
