@@ -924,6 +924,8 @@ class DynamicProgramming:
         self.m_house_rober = self.rob(nums=[1, 3, 1])
         self.mi_min_coins_number = self.coinChange(coins=[2], amount=3)
 
+    #######################################---- 198. House Robber ----################################
+
     def rob(self, nums: List[int]) -> int:
         if not nums:
             return 0
@@ -939,6 +941,10 @@ class DynamicProgramming:
                 total_robbed[i] = max(nums[i] + total_robbed[i - 2], total_robbed[i - 1])
             return total_robbed[-1]
 
+    #######################################----198. House Robber ----################################
+
+    #######################################---- 322. Coin Change ----################################
+
     def coinChange(self, coins: List[int], amount: int) -> int:
         l_dp = [float('inf')] * (amount + 1)
         l_dp[0] = 0
@@ -949,6 +955,17 @@ class DynamicProgramming:
         if l_dp[amount] == float('inf'):
             return -1
         return l_dp[amount]
+
+    #######################################---- 322. Coin Change ----################################
+
+    #######################################---- 42. Trapping Rain Water ----################################
+    def trap(self, height: List[int]) -> int:
+        pass
+    #######################################---- 42. Trapping Rain Water ----################################
+
+
+
+
 
 
 class Recursion:
