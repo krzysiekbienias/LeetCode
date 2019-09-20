@@ -18,7 +18,7 @@ class Strings:
         ############################################---- ----#########################################################
 
         ############################################---- ----#########################################################
-        self.mint_first_non_repetingch = self.first_non_repeting_char(s="aadaada")
+        self.mint_first_non_repetingch = self.first_non_repeting_char(s="abacabad")
         ############################################---- ----#########################################################
 
         ############################################---- ----#########################################################
@@ -243,7 +243,7 @@ class Strings:
     #######################################---- 3657. Robot Return to Origin ---################################
 
     #######################################---- 387. First Unique Character in a String ---################################
-    def first_non_repeting_char(self, s):
+    def first_non_repeting_char(self, s:str)->int:
         if s == "":
             return -1
         elif len(s) == 1:
@@ -366,6 +366,7 @@ class Arrays:
         self.m_int_single_numb = self.singleNumber(nums=[1, 2, 1, 2, 4])
         self.m_duplicators = self.containsDuplicate(a_list=[3, 6, 7, 3, 3, 5])
         self.m_without_duplicates = self.removeDuplicates(nums=[0, 0, 1, 1, 1, 2, 2, 3, 3, 4])
+
         self.m_zero_push = self.moveZeroes([0, 1, 0, 3, 12])
         self.mlintFirstEven = self.sortArrayByParity(A=[3, 1, 2, 4])
         self.mlintSquares = self.sortedSquares(A=[-4, -1, 0, 3, 10])
@@ -458,6 +459,8 @@ class Arrays:
             if a_list[i] == a_list[i + 1]:
                 return True
         return False
+
+
 
     # 463 Island perimeter
 
