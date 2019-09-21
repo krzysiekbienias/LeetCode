@@ -44,7 +44,9 @@ class SmoothSailing:
 class EdgeOfTheOcean:
     def __init__(self):
         self.mintAdjaisentProd = self.adjacentElementsProduct(inputArray=[-23, 4, -3, 8, -12])
-        self.mintShapeArea=self.shapeArea(n=999) #maximum recursion depth exceeded in comparison
+        # self.mintShapeArea=self.shapeArea(n=996) #maximum recursion depth exceeded in comparison
+        self.mlStatues = self.makeArrayConsecutive2(statues=[6, 2, 3, 8])
+        self.mbAlmostIncreas=self.almostIncreasingSequence(sequence=[1, 2, 1, 2])
 
     ############################################----adjacentElementsProduct ----#########################################################
     def adjacentElementsProduct(self, inputArray):
@@ -58,12 +60,65 @@ class EdgeOfTheOcean:
 
     ############################################----adjacentElementsProduct ----#########################################################
 
-    def shapeArea(self,n):
+    def shapeArea(self, n):
         if n == 1:
             return 1
         else:
             return self.shapeArea(n - 1) + 4 * (n - 1)
 
+    # for counter, value in enumerate(a):
+
+    def makeArrayConsecutive2(self, statues):
+        statues.sort()
+        missingStatues = []
+        for i in range(len(statues)-1):
+            if statues[i + 1] - statues[i] > 1:
+                dif = statues[i + 1] - statues[i]
+
+                lGaps = list(range(1, dif))
+                for j in range(len(lGaps)):
+                    temp = statues[i] + lGaps[j]
+                    missingStatues.append(temp)
+                i += 1
+
+        return missingStatues
+
+    def almostIncreasingSequence(self,sequence):
+        toRemove=0
+        for i in range(0,len(sequence)-1):
+            if sequence[i]<sequence[i+1]:
+                i+=1
+            else:
+                toRemove+=1
+        if toRemove>1:
+            return False
+        else:
+            return True
+
+class ExploringTheWaters:
+    def __init__(self):
+        self.mlAlternSum=self.alternatingSums(a=[50, 60, 60, 45, 70])
+
+    def alternatingSums(self,a):
+            first = 0
+            last = 0
+            for i in range(len(a)):
+                if a[i] % 2 == 0:
+                    first += a[i]
+                else:
+                    last += a[i]
+            return [first, last]
+
+
+class IslandOfKnowladge:
+    pass
+
+
+class RainsOfReason:
+    pass
+
+class ThroughTheFog:
+    pass
 
 class Interviews:
     def __init__(self):
