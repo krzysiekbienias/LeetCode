@@ -13,6 +13,8 @@ class SmoothSailing:
         self.mintCommon = self.commonCharacterCount(s1='abca', s2='xyzbac')
         ############################################----commonCharacterCount ----#########################################################
 
+        self.mLucky = self.isLucky(n=1230)
+
         ##############################################
 
     def sortByHeight(self, a: List[int]) -> List[int]:  # Andrew_Pudge solution
@@ -40,13 +42,27 @@ class SmoothSailing:
                     counter += temp
         return counter
 
+    def isLucky(self, n):
+
+        s = str(n)
+        lstr = list(s)
+        f = lambda x: int(x)
+        lint = list(map(f, lstr))
+        halfIndex = len(lint) // 2
+        firstHalf = lint[0:halfIndex]
+        secondHalf = lint[halfIndex:]
+        if sum(firstHalf) == sum(secondHalf):
+            return True
+        else:
+            return False
+
 
 class EdgeOfTheOcean:
     def __init__(self):
         self.mintAdjaisentProd = self.adjacentElementsProduct(inputArray=[-23, 4, -3, 8, -12])
         # self.mintShapeArea=self.shapeArea(n=996) #maximum recursion depth exceeded in comparison
         self.mlStatues = self.makeArrayConsecutive2(statues=[6, 2, 3, 8])
-        self.mbAlmostIncreas=self.almostIncreasingSequence(sequence=[1, 2, 1, 2])
+        self.mbAlmostIncreas = self.almostIncreasingSequence(sequence=[1, 2, 1, 2])
 
     ############################################----adjacentElementsProduct ----#########################################################
     def adjacentElementsProduct(self, inputArray):
@@ -71,7 +87,7 @@ class EdgeOfTheOcean:
     def makeArrayConsecutive2(self, statues):
         statues.sort()
         missingStatues = []
-        for i in range(len(statues)-1):
+        for i in range(len(statues) - 1):
             if statues[i + 1] - statues[i] > 1:
                 dif = statues[i + 1] - statues[i]
 
@@ -83,31 +99,44 @@ class EdgeOfTheOcean:
 
         return missingStatues
 
-    def almostIncreasingSequence(self,sequence):
-        toRemove=0
-        for i in range(0,len(sequence)-1):
-            if sequence[i]<sequence[i+1]:
-                i+=1
+    def almostIncreasingSequence(self, sequence):
+        toRemove = 0
+        for i in range(0, len(sequence) - 1):
+            if sequence[i] < sequence[i + 1]:
+                i += 1
             else:
-                toRemove+=1
-        if toRemove>1:
+                toRemove += 1
+        if toRemove > 1:
             return False
         else:
             return True
 
+
 class ExploringTheWaters:
     def __init__(self):
-        self.mlAlternSum=self.alternatingSums(a=[50, 60, 60, 45, 70])
+        self.mlAlternSum = self.alternatingSums(a=[50, 60, 60, 45, 70])
+        self.mSimilar = self.areSimilar(A=[1, 2, 3], B=[2, 1, 3])
 
-    def alternatingSums(self,a):
-            first = 0
-            last = 0
-            for i in range(len(a)):
-                if a[i] % 2 == 0:
-                    first += a[i]
-                else:
-                    last += a[i]
-            return [first, last]
+    def alternatingSums(self, a):
+        first = 0
+        last = 0
+        for i in range(len(a)):
+            if i % 2 == 0:
+                first += a[i]
+            else:
+                last += a[i]
+        return [first, last]
+
+    def areSimilar(self, A, B):
+
+        r = []
+        for i in range(len(A)):
+            if A[i] != B[i]:
+                r.append([A[i], B[i]])
+
+        if len(r) == 0 or len(r) == 2 and r[0] == r[1][::-1]:  # reverse list [::-1] It's smart, It reverse [[aaa][bbb]]
+            return True
+        return False
 
 
 class IslandOfKnowladge:
@@ -117,8 +146,10 @@ class IslandOfKnowladge:
 class RainsOfReason:
     pass
 
+
 class ThroughTheFog:
     pass
+
 
 class Interviews:
     def __init__(self):
@@ -168,6 +199,7 @@ class TestProblems():
         return arr
 
 
+explorWaters = ExploringTheWaters()
 edge = EdgeOfTheOcean()
 smoothSail = SmoothSailing()
 intervi = Interviews()
