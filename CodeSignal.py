@@ -40,50 +40,81 @@ class SmoothSailing:
                     counter += temp
         return counter
 
+
 class EdgeOfTheOcean:
+    def __init__(self):
+        self.mintAdjaisentProd = self.adjacentElementsProduct(inputArray=[-23, 4, -3, 8, -12])
+        self.mintShapeArea=self.shapeArea(n=999) #maximum recursion depth exceeded in comparison
+
+    ############################################----adjacentElementsProduct ----#########################################################
+    def adjacentElementsProduct(self, inputArray):
+        maxProd = -float('inf')
+        for i in range(0, len(inputArray) - 1):
+            temp = inputArray[i] * inputArray[i + 1]
+            if temp > maxProd:
+                maxProd = temp
+
+        return maxProd
+
+    ############################################----adjacentElementsProduct ----#########################################################
+
+    def shapeArea(self,n):
+        if n == 1:
+            return 1
+        else:
+            return self.shapeArea(n - 1) + 4 * (n - 1)
 
 
-
-
-class Interviews():
+class Interviews:
     def __init__(self):
         ############################################----firstNotRepeatingCharacter ----#########################################################
         self.mstrFirstNonRepeating = self.firstNotRepeatingCharacter(s='z')
-        self.mintFirstDuplicates=self.firstDuplicate(a=[2, 1, 3, 5, 3, 2])
+        self.mintFirstDuplicates = self.firstDuplicate(a=[2, 1, 3, 5, 3, 2])
         ############################################----firstNotRepeatingCharacter ----#########################################################
 
     def firstNotRepeatingCharacter(self, s: str) -> str:
-            if s == "":
-                return -1
-            elif len(s) == 1:
-                return s
-            dic = {}
-            for ch in s:
-                dic[ch] = dic.get(ch, 0) + 1
-                l_chfrequency = list(dic.values())
-            if 1 not in l_chfrequency:
-                return '_'
-            for ch in s:
-                if dic[ch] == 1:
-                    return ch
+        if s == "":
+            return -1
+        elif len(s) == 1:
+            return s
+        dic = {}
+        for ch in s:
+            dic[ch] = dic.get(ch, 0) + 1
+            l_chfrequency = list(dic.values())
+        if 1 not in l_chfrequency:
+            return '_'
+        for ch in s:
+            if dic[ch] == 1:
+                return ch
 
-    def firstDuplicate(self,a):
+    def firstDuplicate(self, a):
         dic = {}
         for i in a:
             dic[i] = dic.get(i, 0) + 1
-            if dic[i]==2:
+            if dic[i] == 2:
                 return i
         else:
             return -1
 
 
+class TestProblems():
+    def __init__(self):
+        self.mlSimpleSort = self.simpleSort(arr=[2, 4, 1, 5])
+
+    def simpleSort(self, arr):
+        n = len(arr)
+        for i in range(n):
+            j = 0
+            stop = n - i
+            while j < stop - 1:
+                if arr[j] > arr[j + 1]:
+                    arr[j], arr[j + 1] = arr[j + 1], arr[j]
+                j += 1
+        return arr
 
 
 edge = EdgeOfTheOcean()
-smoothSail=SmoothSailing()
-intervi=Interviews()
-
-
-
-
+smoothSail = SmoothSailing()
+intervi = Interviews()
+test = TestProblems()
 print('end')

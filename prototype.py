@@ -4,7 +4,7 @@ s.join("kurwa")
 imie='kalinowska'
 cecha='kurwa'
 
-imie.append(imie)
+
 
 
 l=[]
@@ -13,7 +13,7 @@ for i in range(10,-1,-1):
 
 l.pop(5)
 
-cache: dict[int,int]={}
+
 def fib(n):
     if n<=1:
         return n
@@ -21,3 +21,31 @@ def fib(n):
         cache[n]=fib(n-1)+fib(n-2)
     return cache[n]
 
+xs=[()]
+res=[False]*2
+if xs:
+    res[0]=True
+if xs[0]:
+    res[1]=True
+
+a=True
+b=True
+
+not (a==b)
+
+u=bin(13)
+
+def countBits(n):
+    bit=bin(n)[2:]
+    return len(bit)
+
+
+def modulus(n):
+    if type(n) is int:
+        return n % 2
+    else:
+        return -1
+
+
+if type([3,5,6,1]) is list:
+    return
