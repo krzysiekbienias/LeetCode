@@ -100,9 +100,10 @@ class TreeNode:
 if __name__ == '__main__':
     bst = TreeNode(4)
     bst.insert(2).insert(1).insert(3).insert(7).insert(10)
+    print(bst)
     # it would be nice if we could cast bst into list but list(bst) does not work.
 
-    # print(bst.contains(7))
+    print(bst.contains(7))
     subbst = bst.searchBST(6)
     dfsTraversal = bst.preorderTraversal(node=bst)
     bstHeight=bst.height(node=bst)

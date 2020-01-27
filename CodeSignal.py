@@ -62,7 +62,7 @@ class EdgeOfTheOcean:
         self.mintAdjaisentProd = self.adjacentElementsProduct(inputArray=[-23, 4, -3, 8, -12])
         # self.mintShapeArea=self.shapeArea(n=996) #maximum recursion depth exceeded in comparison
         self.mlStatues = self.makeArrayConsecutive2(statues=[6, 2, 3, 8])
-        self.mbAlmostIncreas = self.almostIncreasingSequence(sequence=[1, 2, 1, 2])
+        self.mbAlmostIncreas = self.almostIncreasingSequence(sequence=[1, 2, 5, 3, 5])
 
     ############################################----adjacentElementsProduct ----#########################################################
     def adjacentElementsProduct(self, inputArray):
@@ -99,17 +99,30 @@ class EdgeOfTheOcean:
 
         return missingStatues
 
-    def almostIncreasingSequence(self, sequence):
-        toRemove = 0
-        for i in range(0, len(sequence) - 1):
-            if sequence[i] < sequence[i + 1]:
-                i += 1
-            else:
-                toRemove += 1
-        if toRemove > 1:
-            return False
-        else:
-            return True
+    # def almostIncreasingSequence(self, sequence):
+    #
+    #             return True
+    #         for i in range(1,len(sequence)):
+    #             if k==0:
+    #                 if sequence[i -1] > sequence[i] and i==1:
+    #                     sequence.pop(i-1)
+    #                     break
+    #             if k==1:
+    #                 if sequence[i -1] > sequence[i] and i==1:
+    #                     sequence.pop(i)
+    #                     break
+    #
+    #
+    #
+    #             elif sequence[i-1] > sequence[i]:
+    #                 sequence.pop(i-1)#remove next
+    #                 break
+    #
+    #         for j in range(1,len(sequence) ):
+    #             if sequence[j-1] > sequence[j]:
+    #                 trial+=1
+    #
+    #
 
 
 class ExploringTheWaters:

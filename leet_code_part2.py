@@ -3,6 +3,7 @@ import numpy as np
 from collections import Counter
 
 
+
 class Strings:
     def __init__(self):
         ############################################---- ----#########################################################
@@ -999,6 +1000,30 @@ class Recursion:
         return subsets
 
 
+class Stack:
+    def __init__(self):
+        self.mi_largestRectangeInHistogram=self.largestRectangleArea(heights=[3,4,5,1,2]) #example from youtube
+
+    def largestRectangleArea(self, heights: List[int]) -> int:
+        stack=[] #make sure stack is not empty
+        maxArea=0
+        for i in range(len(heights)):
+            if len(stack)==0 or heights[stack[-1]]<=heights[i]:
+                    stack.append(i)
+            else:
+                stack_top=stack.pop()
+                if not stack:
+                    temp=heights[stack_top]*(i-1)
+                else:
+                    temp= heights[stack_top]*(i-stack[-1]-1)
+                if maxArea<temp:
+
+                     maxArea=temp
+        return maxArea
+
+
+
+    
 ######################################----SOLUTIONS----#####################################################
 strings_lc = Strings()
 arrays_lc = Arrays()
@@ -1006,5 +1031,6 @@ searching_lc = Searching()
 math_lc = Math()
 dynamic_prog_lc = DynamicProgramming()
 recursion = Recursion()
+stackQuestions=Stack()
 
 print("The end")
