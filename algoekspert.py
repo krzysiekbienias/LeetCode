@@ -59,6 +59,40 @@ class Arrays:
 
         return tripletsWithoutDuplicates
 
+    def smallestDifference(self,arrayOne,arrayTwo):
+        arrayOne.sort()
+        arrayTwo.sort()
+        idxOne=0
+        idxTwo=0
+        smallest=float("inf")
+        current=float("inf")
+        smallesPair=[]
+        while idxOne<len(arrayOne) and idxTwo<len(arrayTwo):
+            firstNum=arrayOne[idxOne]
+            secondNum=arrayTwo[idxTwo]
+            if firstNum<secondNum:
+                current=secondNum-firstNum
+                idxOne+=1
+            elif secondNum<firstNum:
+                current=firstNum-secondNum
+                idxTwo+=1
+            else: #firstNum-secondNum=0
+                return [firstNum,secondNum]
+            if smallest>current:
+                smallest=current
+                smallesPair=[firstNum,secondNum]
+        return smallesPair
+
+    def moveElementToEnd(self,array,toMove):
+        i=0
+        j=len(array)-1
+        while i <j:
+            while i<j and array[j]==toMove:
+                j-=1
+            if array[i]==toMove:
+                array[i],array[j]=array[j],array[i]
+            i+=1
+        return array
 
 ########################################----Three Sum ----######################################################
 
@@ -120,9 +154,50 @@ class Strings:
 
     ########################################----Cesar Cipher Encryptor ----#############################################
 
+class Searching:
+    def __init__(self):
+        self.l_findThreeLargestNumbers=self.findThreeLargestNumbersMySol(array=[141,1,17,-7,-17,-27,18,541,8,7,7])
+
+    ########################################---- Find Three Largest Numbers ----#############################################
+    #if we can sort array
+    #O(nlog(n))
+    def findThreeLargestNumbersMySol(self, array):
+        array.sort()
+        return array[-3:]
+
+    #we can do better O(n)
+    def findThreeLargestNumbers(self,array):
+        threeLargest=[None,None,None]
+        for num in array:
+            self.updateLargest(threeLargest,num)
+        return threeLargest
+
+    def updateLargest(self,threeLargest,num):
+        if threeLargest[2] is None or num>threeLargest[2]:
+            self.shiftAndUpdate(threeLargest,num,2)
+        elif threeLargest[1] is None or num>threeLargest[1]:
+            self.shiftAndUpdate(threeLargest,num,1)
+        elif threeLargest[0] is None or num>threeLargest[0]:
+            self.shiftAndUpdate(threeLargest,num,0)
+
+    def shiftAndUpdate(self,array,num,idx):
+        for i in range(idx+1)
+            if i==idx:
+                array[i]=num
+            else:
+                array[i]=array[i+1]
+    ########################################----Find Three Largest Numbers ----#############################################
+
+
+
+
+
+
+
 
 arrays_algo = Arrays()
 sorting_algo = Sorting()
 recursion_algo = Recursion()
+searching_algo=Searching()
 
 print('the end')
