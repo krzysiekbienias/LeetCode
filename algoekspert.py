@@ -181,23 +181,100 @@ class Searching:
             self.shiftAndUpdate(threeLargest,num,0)
 
     def shiftAndUpdate(self,array,num,idx):
-        for i in range(idx+1)
+        for i in range(idx+1):
             if i==idx:
                 array[i]=num
             else:
                 array[i]=array[i+1]
     ########################################----Find Three Largest Numbers ----#############################################
 
+    ########################################----Search in Sorted Matrix ----#############################################
+    def searchInSortedMatrix(self,matrix,target):
+        row=matrix[0][0]
+        col=len(matrix[0])-1
+        while row<len(matrix) and col>=0:
+            if matrix[row][col]>target:
+                col-=1
+            elif matrix[row][col]<target:
+                row+=1
+            else:
+                return [row,col]
+        return [-1,-1]
+    ########################################----Search in Sorted Matrix ----#############################################
 
 
+class DynamicProgramming:
+    def __init__(self):
+        self.i_waterArea=self.waterArea(pillars=[0,8,0,0,5,0,0,10,0,0,1,1,0,3])
+        self.i_coinChange=self.coinChange(denoms=[1,2,5],amount=11)
+        self.i_maxSubsetSumNoAdjacent=self.maxSubsetSumNoAdjacent(array=[7,10,12,7,9,14])
+
+    ########################################---- Water Area ----#############################################
+    def waterArea(self,pillars):
+        l_watterUnits=[0]*len(pillars)
+        l_leftMax=[] #tallest pillar on left of current index
+        l_rightMax=[]
+        leftMax_i=0
+        righMax_i=0
+        l_leftMax=l_leftMax+[0]
+        for i in range(1,len(pillars)):
+
+            pillar=pillars[i]
+            leftMax_i=max(leftMax_i,pillars[i-1])
+            l_leftMax.append(leftMax_i)
+        #l_rightMax = l_rightMax + [0]
+        for i in reversed(range(1,len(pillars))):
+            pillar=pillars[i]
+            righMax_i=max(righMax_i,pillars[i])
+            l_rightMax.append(righMax_i)
+        l_rightMax.reverse()
+        l_rightMax=l_rightMax+[0]
+
+        # for i in range(len(pillars)):
+        #     minHight=l_leftMax[i]
 
 
+        return None
+
+    ########################################---- Water Area ----#############################################
+
+    ########################################---- Min numbers of Coins For Change ----#############################################
+
+    def coinChange(self, denoms: List[int], amount: int) -> int:
+        l_numOfCoins = [float('inf')] * (amount + 1)
+        l_numOfCoins[0] = 0
+        for denom in denoms:
+            for amount in range(len(l_numOfCoins)):
+
+                if denom <= amount:
+                    l_numOfCoins[amount] = min(l_numOfCoins[amount], 1 + l_numOfCoins[amount - denom])
+        if l_numOfCoins[amount] == float('inf'):
+            return -1
+        else:
+            return l_numOfCoins[amount]
+
+    ########################################---- Min numbers of Coins For Change ----#############################################
+
+    ########################################---- Maximum subset sum with no adjacent element ----#############################################
+    def maxSubsetSumNoAdjacent(self,array):
+        if not len(array):
+            return 0
+        elif len(array)==1:
+            return array[0]
+        elif len(array)==2:
+
+           return max(array[0],array[1])
+        maxSum = [0] * len(array)
+        for i in range(2,len(array)):
+            maxSum[i]=max(maxSum[i-1],maxSum[i-2]+array[i])
+        return maxSum[-1]
 
 
-
+    ########################################---- Maximum subset sum with no adjacent element ----#############################################
 arrays_algo = Arrays()
 sorting_algo = Sorting()
 recursion_algo = Recursion()
 searching_algo=Searching()
+dynamicPrograming_algo=DynamicProgramming()
 
 print('the end')

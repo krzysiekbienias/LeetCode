@@ -949,16 +949,18 @@ class DynamicProgramming:
 
     #######################################---- 322. Coin Change ----################################
 
-    def coinChange(self, coins: List[int], amount: int) -> int:
-        l_dp = [float('inf')] * (amount + 1)
-        l_dp[0] = 0
-        for x in range(1, amount + 1):
-            for coin in coins:
-                if x >= coin:
-                    l_dp[x] = min(l_dp[x], 1 + l_dp[x - coin])
-        if l_dp[amount] == float('inf'):
+    def coinChange(self, denoms: List[int], amount: int) -> int:
+        l_numOfCoins = [float('inf')] * (amount + 1)
+        l_numOfCoins[0] = 0
+        for denom in denoms:
+            for amount in range(len(l_numOfCoins)):
+
+                if denom <= amount:
+                    l_numOfCoins[amount] = min(l_numOfCoins[amount], 1 + l_numOfCoins[amount - denom])
+        if l_numOfCoins[amount] == float('inf'):
             return -1
-        return l_dp[amount]
+        else:
+            return l_numOfCoins[amount]
 
     #######################################---- 322. Coin Change ----################################
 
