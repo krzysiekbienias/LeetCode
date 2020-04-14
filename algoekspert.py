@@ -6,6 +6,9 @@ class Arrays:
 
         self.mli_two_sum = self.two_number_sum(array=[3, 5, -4, 8, 11, 1, -1, 6], target=10)
         self.mThreeSum = self.three_number_sum([-4,-2,-2,-2,0,1,2,2,2,3,3,4,4,6,6], target=0)
+        self.b_isMonotonic=self.isMonotonic(array=[1,1,1,2,6,3,5])
+
+
 
     ########################################----Two Sum ----######################################################
     # O(nlog(n))|O(1)
@@ -59,6 +62,9 @@ class Arrays:
 
         return tripletsWithoutDuplicates
 
+    ########################################----Three Sum ----######################################################
+
+    ########################################----Smallest Difference----######################################################
     def smallestDifference(self,arrayOne,arrayTwo):
         arrayOne.sort()
         arrayTwo.sort()
@@ -83,6 +89,9 @@ class Arrays:
                 smallesPair=[firstNum,secondNum]
         return smallesPair
 
+    ########################################----Smallest Difference----######################################################
+
+    ########################################----Move elemet to the end----######################################################
     def moveElementToEnd(self,array,toMove):
         i=0
         j=len(array)-1
@@ -94,7 +103,35 @@ class Arrays:
             i+=1
         return array
 
-########################################----Three Sum ----######################################################
+########################################----Move elemet to the end ----######################################################
+
+########################################---- Is Monotoonic ----######################################################
+    def breakDirection(self, direction, prevInt,currentInt):
+        #respecting or following direction
+        difference=currentInt-prevInt
+        if direction>0:
+            return difference<0
+        return difference>0
+
+
+    def isMonotonic(self,array):
+        if len(array)<=2:
+            return True
+
+        direction=array[1]-array[0]
+        for i in range(2,len(array)):
+            if direction==0:
+                direction = array[i] - array[i-1]
+                continue
+        #we need to define a funtion that checks whether we don't break direction
+            if self.breakDirection(direction,array[i-1],array[i]):
+                return False
+        return True
+
+####second solution
+
+
+########################################----Is Monotoonic----######################################################
 
 
 class Sorting:
