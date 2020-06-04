@@ -7,6 +7,9 @@ class Arrays:
         self.mli_two_sum = self.two_number_sum(array=[3, 5, -4, 8, 11, 1, -1, 6], target=10)
         self.mThreeSum = self.three_number_sum([-4,-2,-2,-2,0,1,2,2,2,3,3,4,4,6,6], target=0)
         self.b_isMonotonic=self.isMonotonic(array=[1,1,1,2,6,3,5])
+        self.l_langestRange=self.largestRange(arr=[1,11,3,0,15,5,2,4,10,7,12,6])
+        self.l_subsequecne=self.isValidatedSubsequence(arr=[5,1,22,25,6,-1,8,10])
+
 
 
 
@@ -129,9 +132,50 @@ class Arrays:
         return True
 
 ####second solution
+    ########################################----Is Monotoonic----######################################################
 
 
-########################################----Is Monotoonic----######################################################
+    ########################################----Largest Range----######################################################
+    def largestRange(self,arr):
+        di={}
+        longestLenght=0
+        bestRange=[]
+        for num in arr:
+            di[num]=True #label all numbers as true
+        for num in arr:
+            if not di[num]:#if di[num]==False in my opinion it is equivalent
+                continue
+            di[num]=False
+            currentLength=1
+            left =num-1
+            right=num+1
+            while left in di:
+                di[left]=False
+                currentLength+=1
+                left-=1
+            while right in di:
+                di[num]=False
+                currentLength+=1
+                right+=1
+            if currentLength>longestLenght:
+                longestLenght=currentLength
+                bestRange=[left+1,right-1]
+        return bestRange
+    ########################################----Largest Range----######################################################
+
+    def isValidatedSubsequence(self,arr,sequence):
+        arrIdx=0
+        seqIdx=0
+        while arrIdx<len(arr) and seqIdx<len(sequence):
+            if arr[arrIdx]==sequence[seqIdx]:
+                seqIdx+=1
+            arrIdx+=1
+        return seqIdx==len(sequence)
+
+
+
+
+
 
 
 class Sorting:
@@ -172,6 +216,7 @@ class Recursion:
 class Strings:
     def __init__(self):
         self.cipher=self.cipherEncryptor()
+        self.s_longestPalindromicSub=self.longestPalindromicSubstring(string='abaxyzzyxf')
 
     ########################################----Cesar Cipher Encryptor ----#############################################
 
@@ -190,6 +235,25 @@ class Strings:
         return "".join(encryptedPassword)
 
     ########################################----Cesar Cipher Encryptor ----#############################################
+
+    ########################################---- Longest Palindromic Substring ----#############################################
+    def longestPalindromicSubstring(self,string):
+        currentLongest=[0,1]
+        for i in range(1,len(string)):
+            odd=self.getLongestPalindromeFrom(string,i-1,i+1)
+            even=self.getLongestPalindromeFrom(string,i-1,i)
+            longest=max(odd,even,key=lambda x:x[1]-x[0])
+            currentLongest=max(longest,currentLongest,key=lambda x: x[1]-x[0])
+        return string[currentLongest[0]:currentLongest[1]]
+     #helper function
+    def getLongestPalindromeFrom(self,string,leftIdx,rightIdx):
+        while leftIdx>=0 and rightIdx<len(string):
+            if string[leftIdx]!=string[rightIdx]:
+                break
+            leftIdx-=1
+            rightIdx+=1
+        return [leftIdx+1,rightIdx]
+    ########################################----Longest Palindromic Substring ----#############################################
 
 class Searching:
     def __init__(self):
@@ -307,11 +371,57 @@ class DynamicProgramming:
         return maxSum[-1]
 
 
+#####################Graphs
+class Node:
+    def __init__(self,name):
+        self.children=[]
+        self._name=name
+
+    def addChild(self,name):
+        self.children.append(Node(name))
+        return self
+
+    def depthFirstSearch(self,array):
+        array.append(self._name)
+        for child in self.children:
+            child.depthFirstSearch(array)
+            return array
+
+
+
+
+
+graph={
+  "nodes": [
+    {"children": ["B", "C", "D"], "id": "A", "value": "A"},
+    {"children": ["E", "F"], "id": "B", "value": "B"},
+    {"children": [], "id": "C", "value": "C"},
+    {"children": ["G", "H"], "id": "D", "value": "D"},
+    {"children": [], "id": "E", "value": "E"},
+    {"children": ["I", "J"], "id": "F", "value": "F"},
+    {"children": ["K"], "id": "G", "value": "G"},
+    {"children": [], "id": "H", "value": "H"},
+    {"children": [], "id": "I", "value": "I"},
+    {"children": [], "id": "J", "value": "J"},
+    {"children": [], "id": "K", "value": "K"}
+  ],
+  "startNode": "A"
+}
+
+
+node=Node(name=graph["startNode"])
+node.addChild(graph['nodes'])
+print(node.children)
+
+
+
     ########################################---- Maximum subset sum with no adjacent element ----#############################################
 arrays_algo = Arrays()
 sorting_algo = Sorting()
 recursion_algo = Recursion()
 searching_algo=Searching()
 dynamicPrograming_algo=DynamicProgramming()
+
+
 
 print('the end')
