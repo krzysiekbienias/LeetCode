@@ -8,7 +8,7 @@ class Arrays:
         self.mThreeSum = self.three_number_sum([-4,-2,-2,-2,0,1,2,2,2,3,3,4,4,6,6], target=0)
         self.b_isMonotonic=self.isMonotonic(array=[1,1,1,2,6,3,5])
         self.l_langestRange=self.largestRange(arr=[1,11,3,0,15,5,2,4,10,7,12,6])
-        self.l_subsequecne=self.isValidatedSubsequence(arr=[5,1,22,25,6,-1,8,10])
+        self.b_subsequecne=self.isValidatedSubsequence(arr=[5,1,22,25,6,-1,8,10],sequence=[1,6,8])
 
 
 
@@ -163,6 +163,7 @@ class Arrays:
         return bestRange
     ########################################----Largest Range----######################################################
 
+    ########################################----Validate Subsequence----######################################################
     def isValidatedSubsequence(self,arr,sequence):
         arrIdx=0
         seqIdx=0
@@ -171,6 +172,33 @@ class Arrays:
                 seqIdx+=1
             arrIdx+=1
         return seqIdx==len(sequence)
+    ########################################----Validate Subsequence----######################################################
+
+    ########################################----Validate Subsequence----######################################################
+    def smallestDifference(self,arrOne,arrTwo):
+        arrOne.sort()
+        arrTwo.sort()
+        idxOne=0
+        idxTwo=0
+        smallest=float('inf')
+        current=float('inf')
+        smallestPair=[]
+        while idxOne<len(arrOne) and idxTwo<len(arrTwo):
+            firstNum=arrOne[idxOne]
+            secondNum=arrTwo[idxTwo]
+            if firstNum<secondNum:
+                current=secondNum-firstNum
+                idxOne+=1
+            elif secondNum<firstNum:
+                current=firstNum-secondNum
+            else:
+                return [firstNum,secondNum]
+            if smallest>current:
+                smallest=current
+                smallestPair=[firstNum,secondNum]
+        return smallestPair
+
+    ########################################----Validate Subsequence----######################################################
 
 
 
@@ -309,8 +337,35 @@ class DynamicProgramming:
         self.i_waterArea=self.waterArea(pillars=[0,8,0,0,5,0,0,10,0,0,1,1,0,3])
         self.i_coinChange=self.coinChange(denoms=[1,2,5],amount=11)
         self.i_maxSubsetSumNoAdjacent=self.maxSubsetSumNoAdjacent(array=[7,10,12,7,9,14])
+        #self.li_maxSumIncreasing=self.maxSumIncreasingSubsequence(array=[10,70,20,30,50,11,30])
+
+
+    def maxSumIncreasingSubsequence(self,array):
+        sequences=[None for x in array]
+        sums=[num for num in array]
+        maxSumIdx=0
+        for i in range(len(array)):
+            currentNum=array[i]
+            for j in range(0,i):
+                otherNum=array[j]
+                if otherNum<currentNum and sums[j]+currentNum>=sums[i]:
+                    sums[i]=sums[j]+currentNum
+                    sequences[i]=j
+            if sums[i]>=sums[maxSumIdx]:
+                maxSumIdx=i
+        return [sums[maxSumIdx],self.buildSequence(self,array,sequences,maxSumIdx)]
+
+    def buildSequence(self,array,sequences,currentIdx):
+        sequence=[]
+        while currentIdx is not None:
+            sequence.append(array[currentIdx])
+            currentIdx=sequences[currentIdx]
+        return list(reversed(sequence))
+
+
 
     ########################################---- Water Area ----#############################################
+    #O(n) time,O(n) space
     def waterArea(self,pillars):
         l_watterUnits=[0]*len(pillars)
         l_leftMax=[] #tallest pillar on left of current index
@@ -338,6 +393,29 @@ class DynamicProgramming:
         return None
 
     ########################################---- Water Area ----#############################################
+
+    ########################################---- Water Area Better space comp----#############################################
+    #O(n) time, O(1) space
+    def waterAreaImproved(self,pillars):
+        if len(pillars)==0:
+            return 0
+        leftIdx=0
+        rightIdx=len(pillars-1)
+        leftMax=pillars[leftIdx]
+        rightMax=right[rightIdx]
+        surface=0
+        while leftIdx<rightIdx:
+            if(pillars[leftIdx]<pillars[rightIdx]):
+                leftIdx+=1
+                leftMax=max(leftMax,pillars[leftIdx])
+                surface+=leftMax-pillars[leftIdx]
+            else:
+                rightIdx-=1
+                rightMax=max(rightMax,pillars[rightIdx])
+                surface+=rightMax-pillars[rightIdx]
+        return surface
+
+    ########################################---- Water Area Better space comp----#############################################
 
     ########################################---- Min numbers of Coins For Change ----#############################################
 

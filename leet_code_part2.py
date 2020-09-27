@@ -925,7 +925,7 @@ class Math:
 
 class DynamicProgramming:
     def __init__(self):
-        self.m_house_rober = self.rob(nums=[1, 3, 1])
+        self.m_house_rober = self.rob(nums=[5,8,10,3,7,2])
         self.mi_min_coins_number = self.coinChange(coins=[2], amount=3)
 
     #######################################---- 198. House Robber ----################################
